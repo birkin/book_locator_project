@@ -28,7 +28,7 @@ Template [runserver](https://docs.djangoproject.com/en/1.11/ref/django-admin/#ru
         - change all `book_locator_project` references to name of project
         - change all `book_locator_app` references to actual name of app
         - include in above book_locator_app and book_locator_app_templates directories
-        - change all `DJANGO_TEMPLATE__` settings references to name of project-settings prefix
+        - change all `BK_LCTR__` settings references to name of project-settings prefix
     - with new env activated, pip update it from requirements.txt
         - note that version of Django is _partially_ specified -- this is the latest [long-term-support version](https://docs.djangoproject.com/en/dev/internals/release-process/)
         - update requirements.txt with versions
