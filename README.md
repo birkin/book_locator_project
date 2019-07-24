@@ -19,15 +19,15 @@ Template [runserver](https://docs.djangoproject.com/en/1.11/ref/django-admin/#ru
 
         - source new env, and run: `pip install --upgrade pip`
     - git clone existing app, or...
-        - `git clone https://github.com/birkin/django_template_project.git ./project_x`
+        - `git clone https://github.com/birkin/book_locator_project.git ./project_x`
             - remove the .git/ dir
         - set up in SourceTree (git init)
         - push to GitHub
     - make sublime project
     - update names
-        - change all `django_template_project` references to name of project
-        - change all `app_x` references to actual name of app
-        - include in above app_x and app_x_templates directories
+        - change all `book_locator_project` references to name of project
+        - change all `book_locator_app` references to actual name of app
+        - include in above book_locator_app and book_locator_app_templates directories
         - change all `DJANGO_TEMPLATE__` settings references to name of project-settings prefix
     - with new env activated, pip update it from requirements.txt
         - note that version of Django is _partially_ specified -- this is the latest [long-term-support version](https://docs.djangoproject.com/en/dev/internals/release-process/)

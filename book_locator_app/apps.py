@@ -4,4 +4,4 @@ from django.apps import AppConfig
 
 
 class AppXConfig(AppConfig):
-    name = 'app_x'
+    name = 'book_locator_app'
