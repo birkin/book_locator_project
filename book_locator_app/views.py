@@ -17,14 +17,21 @@ log = logging.getLogger(__name__)
 def map( request ):
     """ Manages build and display of map. """
     log.debug( 'map hit' )
+    ## check params
     location = request.GET.get( 'loc', None )
     call_number = request.GET.get( 'call', None )
     if ( location is None ) or ( call_number is None ):
         return HttpResponseBadRequest( '400 / Bad Request -- Location and call number required.' )
-    log.debug( 'Map requested for location ```{location}``` and callnumber ```{callnumber}```' )
+    log.debug( f'Map requested for location ```{location}``` and call_number ```{call_number}```' )
+    ## check location
     LOCATE_LOCATIONS = ['rock', 'sci']
     if location.lower() not in LOCATE_LOCATIONS:
         return HttpResponseNotFound( '404 / Not Found -- No maps for this location.' )
+
+    item_key = f'{location}-{call_number.strip()}'
+    log.debug( f'item_key, ```{item_key}```' )
+
+
 
     return HttpResponse( 'coming' )
 
