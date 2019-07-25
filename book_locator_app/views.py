@@ -3,6 +3,7 @@
 import datetime, json, logging, os, pprint
 from . import settings_app
 from book_locator_app.lib import view_info_helper
+from book_locator_app.lib.locator import ServiceLocator
 # from book_locator_app.lib.shib_auth import shib_login  # decorator
 from django.conf import settings as project_settings
 from django.contrib.auth import logout
@@ -12,6 +13,8 @@ from django.shortcuts import get_object_or_404, render
 
 
 log = logging.getLogger(__name__)
+
+bk_locator = ServiceLocator()
 
 
 def map( request ):
@@ -24,14 +27,13 @@ def map( request ):
         return HttpResponseBadRequest( '400 / Bad Request -- Location and call number required.' )
     log.debug( f'Map requested for location ```{location}``` and call_number ```{call_number}```' )
     ## check location
-    LOCATE_LOCATIONS = ['rock', 'sci']
-    if location.lower() not in LOCATE_LOCATIONS:
+    if location.lower() not in settings_app.LOCATE_LOCATIONS:
         return HttpResponseNotFound( '404 / Not Found -- No maps for this location.' )
 
     item_key = f'{location}-{call_number.strip()}'
     log.debug( f'item_key, ```{item_key}```' )
 
-
+    loc_data = bk_locator.run(call_number.strip(), location)
 
     return HttpResponse( 'coming' )
 

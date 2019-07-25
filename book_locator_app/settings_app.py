@@ -7,6 +7,10 @@ README_URL = os.environ['BK_LCTR__README_URL']
 
 INFO_URL = os.environ['BK_LCTR__README_URL']
 
+LOCATE_LOCATIONS = ['rock', 'sci']
+
+DATA_DIR = os.environ['BK_LCTR__DATA_DIR_PATH']  # data saved from google-sheet
+
 
 ## auth
 # SUPER_USERS = json.loads( os.environ['BK_LCTR__UPER_USERS_JSON'] )
