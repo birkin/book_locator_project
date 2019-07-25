@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import json, logging, os
+import bisect, json, logging, os
 
 from book_locator_app import settings_app
 from book_locator_app.lib.normalizer import Item
@@ -60,7 +60,7 @@ class ServiceLocator():
             located = True
         aisle = loc_data.get('aisle').upper()
         return {
-            'floor': unicode(loc_data.get('floor')).upper(),
+            'floor': str(loc_data.get('floor')).upper(),
             'aisle': aisle,
             # For display we will split out aisle and side.
             'display_aisle': "".join(aisle[:-1]),
