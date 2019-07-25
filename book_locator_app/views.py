@@ -34,6 +34,7 @@ def map( request ):
     log.debug( f'item_key, ```{item_key}```' )
 
     loc_data = bk_locator.run(call_number.strip(), location)
+    log.debug( f'loc_data, ```{loc_data}```' )
 
     return HttpResponse( 'coming' )
 
