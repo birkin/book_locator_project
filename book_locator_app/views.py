@@ -7,7 +7,7 @@ from book_locator_app.lib import view_info_helper
 from django.conf import settings as project_settings
 from django.contrib.auth import logout
 from django.core.urlresolvers import reverse
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 
 
@@ -17,6 +17,11 @@ log = logging.getLogger(__name__)
 def map( request ):
     """ Manages build and display of map. """
     log.debug( 'map hit' )
+    location = request.GET.get( 'loc', None )
+    call_number = request.GET.get( 'call', None )
+    if ( location is None ) or ( call_number is None ):
+        return HttpResponseBadRequest( '400 / Bad Request -- Location and call number required.' )
+
     return HttpResponse( 'coming' )
 
 
