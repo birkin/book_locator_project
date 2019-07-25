@@ -14,8 +14,15 @@ from django.shortcuts import get_object_or_404, render
 log = logging.getLogger(__name__)
 
 
+def map( request ):
+    """ Manages build and display of map. """
+    log.debug( 'map hit' )
+    return HttpResponse( 'coming' )
+
+
 def info( request  ):
     """ Redirects to something useful. """
+    log.debug( 'info hit' )
     return HttpResponseRedirect( settings_app.INFO_URL )
 
 
