@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 
-import logging, os
+import json, logging, os
 
 from book_locator_app import settings_app
+from book_locator_app.lib.normalizer import Item
 
 
 log = logging.getLogger(__name__)
@@ -47,7 +48,9 @@ class ServiceLocator():
         # upcase call numbers
         callnumber = callnumber.strip().upper()
         try:
-            normalized_callnumber = brown.normalize(callnumber, location).upper()
+            # normalized_callnumber = brown.normalize(callnumber, location).upper()
+            item = Item( callnumber, location )
+            normalized_callnumber = item.normalize().upper()
         except AttributeError:
             logger.info("Could not normalize callnumber {}.".format(callnumber))
             return None
