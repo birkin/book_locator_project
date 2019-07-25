@@ -5,6 +5,9 @@ import json, os
 
 README_URL = os.environ['BK_LCTR__README_URL']
 
+INFO_URL = os.environ['BK_LCTR__README_URL']
+
+
 ## auth
 # SUPER_USERS = json.loads( os.environ['BK_LCTR__UPER_USERS_JSON'] )
 # STAFF_USERS = json.loads( os.environ['BK_LCTR__STAFF_USERS_JSON'] )  # users permitted access to admin

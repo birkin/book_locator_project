@@ -13,7 +13,9 @@ urlpatterns = [
 
     # url( r'^admin/login/', RedirectView.as_view(pattern_name='login_url') ),
 
-    url( r'^admin/', admin.site.urls ),  # eg host/project_x/admin/
+    url( r'^info/', views.info, name='info_url' ),
+
+    url( r'^admin/', admin.site.urls ),
 
     url( r'^version/$', views.version, name='version_url' ),
 
@@ -21,6 +23,6 @@ urlpatterns = [
 
     # url( r'^login/$', views.login, name='login_url' ),
 
-    url( r'^$', RedirectView.as_view(pattern_name='version_url') ),
+    url( r'^$', RedirectView.as_view(pattern_name='info_url') ),
 
     ]
