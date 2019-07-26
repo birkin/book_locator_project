@@ -1,0 +1,23 @@
+{% extends "book_locator_app_templates/base.html" %}
+
+{% block content %}
+<div class="bookinfo">
+	<div id="title">{{ title }}</div>
+    <div id="printbutton">
+        <a href="#" onclick="window.print(); return false;">print</a>
+    </div>
+	<div style="clear: both"></div>
+	<div id="location">
+        {{ call_number }} Level {{ item.floor }}, Aisle {{ item.display_aisle }}{{ item.side }}
+        {% if status %}
+        <span class="status">
+            <br/> Status: {{ status }}
+        </span>
+        {% endif %}
+    </div>
+</div>
+
+	<!-- Call the floor template -->
+	{% include floor %}
+{% endblock %}
+
