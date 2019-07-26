@@ -1,13 +1,18 @@
+{% load staticfiles %}
+
 <!doctype html>
 <html>
 <head>
 <title>Library Stack Guide :: Brown University Library</title>
+
 <!--JS -->
-<script type="text/javascript" src="{{ url_for('static', filename='maps/js/DD_roundies.js') }}"></script>
-<script type="text/javascript" src="{{ url_for('static', filename='maps/js/locator.js') }}"></script>
+<script type="text/javascript" src="{% static 'js/DD_roundies.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/locator.js' %}"></script>
+
 <!--CSS-->
-<link rel="stylesheet"type="text/css" href="{{ url_for('static', filename='maps/css/styles.css') }}" />
-<link rel="stylesheet"type="text/css" media="print" href="{{ url_for('static', filename='maps/css/print.css') }}" />
+<link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'css/print.css' %}" rel="stylesheet" type="text/css" media="print" />
+
 {% block extra_css %}
 {% endblock %}
 
@@ -18,8 +23,10 @@
 {% endblock %}
 
 <!-- for highlighting map cell -->
+
 {% block js_highlighter %}
 {% endblock %}
+
 </body>
 
 </html>
