@@ -36,6 +36,53 @@ def map( request ):
     loc_data = bk_locator.run(call_number.strip(), location)
     log.debug( f'loc_data, ```{loc_data}```' )
 
+    status = request.GET.get( 'status', None )
+    log.debug( f'status, ```{status}```' )
+
+    floor = loc_data['floor']
+    log.debug( f'floor, ```{floor}```' )
+
+    title = request.GET.get( 'title', None )
+    log.debug( f'title, ```{title}```' )
+
+    floor_template = f'book_locator_app_templates/locations/{location}{floor}.html'
+    log.debug( f'floor_template, ```{floor_template}```' )
+
+    # item_template = "maps/{}_item.html".format(location),
+    item_template = f'book_locator_app_templates/{location}_item.html'
+    log.debug( f'item_template, ```{item_template}```' )
+
+    context = {
+        'call_number': call_number,
+        'floor_template': floor_template,
+        'item': loc_data,
+        'location': location,
+        'status': status,
+        'title': title,
+    }
+
+    resp = render( request, item_template, context )
+
+    return resp
+
+
+
+    # status = request.args.get('status')
+    # floor = loc_data['floor']
+    # floor_template = "maps/locations/{}{}.html".format(location, floor)
+    # title = request.args.get('title')
+    # return render_template(
+    #     "maps/{}_item.html".format(location),
+    #     location=location,
+    #     call_number=call_number,
+    #     title=title,
+    #     status=status,
+    #     item=loc_data,
+    #     floor=floor_template
+    # )
+
+
+
     return HttpResponse( 'coming' )
 
 
