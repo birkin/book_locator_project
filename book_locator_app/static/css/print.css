@@ -1,0 +1,32 @@
+.col {
+	border-right: 1px gray dotted;
+	width: 15px;
+}
+.row {
+	border-bottom: 1px gray dotted;
+	height: 15px;
+}
+
+.activeA, .activeB {
+
+	padding: 0 1em 0 1em;
+	border: 1px solid;
+	
+}
+
+.activeA div.a, .activeB div.b {
+	border: 1px dashed;
+}
+
+body {
+	font-size: 10px;
+}
+.current {
+	border: 2px black solid;
+}
+body {
+	background: white;
+	}
+.container {
+	background: transparent;
+}

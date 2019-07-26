@@ -1,0 +1,117 @@
+/* Page Elements */
+	.page{width:505px;height:505px;margin:0 auto;}	
+	#orwigB.container {width:330px; height:505px;margin:0px auto;position:absolute;text-align:center;}	
+	#orwig1.container {width:505px; height:330px;position:absolute;text-align:center;}
+
+/* Padder */
+	 #orwigB .padder{height:100%;width:100%;margin:-40px 0 0 0;} 
+
+/* Vertical Divisions */
+	#orwigB .top{height:140px;width:330px;}
+		#orwigB .top  .left .top{height:48%;width:100%;}
+		#orwigB .top  .left .bottom{height:52%;width:100%;}
+	#orwigB .middle{height:170px;width:205px;margin:-20px 10px 0 0;}
+	#orwigB .bottom{height:205px;width:140px;}
+		#orwigB .bottom .top{height:48%;width:100%;}
+		#orwigB .bottom .bottom{height:52%;width:100%;}
+		
+	#orwig1 .top{height:115px;width:146px;margin-left:268px;}
+	#orwig1 .middle{height:66px;width:240px;margin-left:110px;}
+	#orwig1 .bottom{height:135px;width:505px;}
+	
+	#orwig1 .bottom .left .top{height:20%;width:100%;margin:0;}
+	#orwig1 .bottom .left .bottom{height:80%;width:100%;margin:0;}
+	#orwig1 .bottom .right .top{height:20%;width:100%;margin:0;}
+	#orwig1 .bottom .right .bottom{height:80%;width:100%;margin:0;}
+/* Horizontal Divisions */
+	#orwigB .top .left{width:35%;height:100%;margin-top:10%;float:left;}	
+	#orwigB .top .right{width:65%;height:60%;float:right;margin-top:21%;}	
+	#orwigB .middle .left{width:42%;height:100%;float:left;}	
+	#orwigB .middle .right{width:42%;height:100%;float:right;}	
+	#orwigB .bottom  .top .left{width:28%;float:left;}	
+	#orwigB .bottom  .top .right{width:58%;float:right;margin:0;}	
+	
+	#orwig1 .bottom .left{width:35%;height:100%;}
+		#orwig1 .bottom  .left .study .left{width:60%;height:100%;}
+		#orwig1 .bottom  .left .study .right{width:40%;height:100%;}
+	#orwig1 .bottom .right{width:30%;height:100%;}
+	#orwig1 .bottom .left .bottom .left,#orwig1 .bottom .left .bottom .right{height:80%;width:40%;margin:0 0 10% 0;}
+	#orwig1 .top .left,#orwig1 .top .right{height:100%;width:50%;}
+	#orwig1 .middle .left{width:80%;height:100%;}
+
+/*Corridor*/
+	
+
+/*Staff */
+	#orwig1 .bottom .right .bottom .staff {height:100%;}
+		
+/* Blank */ 
+	#orwigB .top .left .bottom .blank{height:100%;width:100%;}
+	#orwigB .top .right .blank{height:100%;width:100px;}
+	#orwigB .middle .left .blank{width:90%;height:100%;}	
+	#orwigB .middle .right .blank{width:75%;height:2%;margin:5% 0;}	
+	#orwigB .bottom  .top .right .blank{width:100%;height:5%;margin:0;}	
+	#orwigB .bottom  .bottom .blank{width:60%;height:5%;margin-left:30%;}	
+	
+	#orwig1 .bottom .left .blank{width:4px;height:60%;margin:20% 0;}
+	#orwig1 .middle .left .blank{width:100%;height:100%;}
+	#orwig1 .top .left .blank, #orwig1 .top .right .blank{height:70%;width:98%;}
+	
+/* Study */
+	#orwigB .top  .left .top .study{height:100%;width:30%;} /*piano room */
+	#orwigB .bottom .bottom .study{width:100%;height:60%;}
+	#orwig1 .bottom .left .study{width:100%;height:100%;}
+
+	
+/* Stairs */
+	#orwigB .bottom  .bottom .stair{width:33%;height:40%;}	
+
+/* Bathroom */	
+	#orwigB .top .left .top .bathroom{width:70%;/*100% - .top .left .top .study */height:50%;} 
+
+/* Rows & Cols & Labels */
+#orwigB .col .label {text-align:center;height:30%;}
+#orwigB .col .stacks {height:70%;width:85%;margin:0 auto;}
+#orwigB .row .label{text-align:left;float:left;width:20%;}
+#orwigB .row .stacks {width:80%;float:right;height:100%;}
+	#oB29,#oB31,#oB33{margin-bottom:10px;}
+	
+	#orwigB .col {width:7px;}
+		#orwigB .col .stacks{width:100%;}
+			#orwigB .col .stacks .a,#orwigB .col .stacks .b{width:80%;}
+			#orwigB .col .stacks .a{float:right;}
+		
+	#orwigB .row{height:7px;}
+		#orwigB .row .stacks .a, #orwigB .row .stacks .b{height:80%;}
+#oB52{margin-top:20px;}
+#oB55{margin-left:10px;}
+#oB76{margin-top:60px;}
+#o12 .a {margin-top:115px;width:80px;}
+	#orwigB .top .left .bottom .blank .col{height:70%;margin-top:17%;}
+	#orwigB .top .right .col{height:70%;margin-top:10%;}
+	#orwigB .top .right .blank .col{height:70%;}
+	#orwigB .middle .left .blank .col{height:60%;margin-top:80%;}
+	#orwigB .closed .stackHolder{}
+	
+#owrigb .label{background:#fff;}
+	
+/* Backgrounds */
+
+	#orwig1 .top{background:#fff;}
+	.top .left, .top .right, .middle, .bottom{background:#fff;}
+/*Fonts*/
+	#orwigB .label{font: .7em/.8em verdana, sans-serif;}
+
+/* Hover Fun */
+
+
+
+.nav{display:none;}
+
+
+/* .odd{opacity:.40;filter: alpha(opacity=40); -moz-opacity: 0.40} */
+#orwigB .even{text-indent:-999em;line-height:999em;}
+
+
+
+f

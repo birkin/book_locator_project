@@ -1,0 +1,132 @@
+/* Page Elements */
+	.container {width:600px; margin:0px;border:0px; text-align:center;}
+	.floorContainer{position:relative;float:left;width:125px;;margin-bottom:10px;}
+.bookinfo {
+	margin-left: .5em;
+	margin-right:10px;
+	position:absolute;
+	left:140px;
+	width: 450px;
+}
+.bookinfo p {
+	margin-top:0px;
+	color:#000000;
+	font-size:15px;
+}
+.bookinfo h1 {
+	margin-top: 15px;
+	font-size: 18px;
+}
+
+/* Padder */
+	#rockB .padder{height:300px;width:580px;margin-bottom:38px;}
+		#rB36{margin-left:10px;}
+		#rB42{margin-right:20px;}
+		#rB35{margin-right:20px;}
+	#rock1 .padder {height:526px;width:760px;margin-bottom:34px;}		
+	#rockA .padder{height:390px;width:610px;margin-bottom:8px;margin-left:0px;}
+		#rockA  .left .top .padder{height:214px;width:160px;position:absolute;margin:0px 0 0 0;}
+		#rockA .right .padder,#rock1 .right .padder, #rock2 .right .padder{margin: 0 5px 3px 5px;width:100px;height:100%;}
+	#rock2 .padder {height:400px;width:595px;}
+	#rock3 .padder, #rock4 .padder {width:610px;height:380px;margin:5px 0px 0px 0px;}
+
+/* Vertical Divisions */
+	#rock3 .top, #rock4 .top{height:110px;margin:0px;} #rockB .top{height:100px;} #rockA .top,#rock1 .top, #rock2 .top {height:100px;}
+	#rock3 .middle, #rock4 .middle{height:126px;margin:0px;} #rockB .middle{height:100px;} #rockA .middle {height:165px;} #rock2 .middle {height:126px;} #rock1 .middle{height:200px;}
+	#rock1 .bottom{height:102px;} #rock3 .bottom, #rock4 .bottom{height:110px;margin:0 0px;} #rockB .bottom{height:100px;} #rockA .bottom {height:100px;} #rock2 .bottom {height:153px;}
+		.subTop{height:41px;margin-bottom:2px;}	
+		.subBottom{height:63px;} 
+
+/* Horizontal Divisions */
+	#rockA .left {width:505px;}  #rock1 .left {width:548px;} #rock2 .left {width:495px;} 
+	#rockA .right, #rock1 .right, #rock2 .right {width:100px;height:100%;}	
+		#rockA .middle .subLeft{margin-top:100px;height:66px;width:70px;} #rockA .bottom .subLeft {height:100px;} #rockA .bottom .subRight {height:100px;}
+		.subLeft, .subRight{height:153px;} /*same as level2 & levelA bottom height*/  #rockA  .bottom .subLeft, #rock2 .bottom .subLeft{width:155px;} #rockA .bottom .subLeft{margin-left:0px;} #rock2 .bottom .subLeft{margin-left:0px;} .subRight{width:338px;} /*sum #rockA, #rock2 .left*/
+
+/*Corridor*/
+	#rockA .corridor, #rock1 .corridor,  #rock2 .corridor, #rock3 .corridor, #rock4 .corridor{height:15px;} #rockB .corridor{height:16px;} 
+	#rock1 .middle .corridor{width:100px;height:25px;margin:0;position:relative;}	
+	#rock2 .middle .corridor{width:50px;height:25px;margin:0;position:relative;}
+
+/*Staff */
+	#rock1 .middle .staff {width:250px;height:100%;margin:0;}
+	#rock1 .bottom .staff {width:150px;height:50%;margin:0;}
+	#rock1 .right .padder .study .blank {width:40%;height:40px;margin:154px 0 0 0;}
+	#rock1 .right .padder .study .staff {width:70%;height:90px;margin:0;}
+	#rock1 .left .top .study .staff {width:30%;height:40%;}
+	#rockA .middle .staff{width:117px;height:126px;margin:0;}
+	#rock2 .middle .staff, #rock2 .middle .studyL {width:50px;height:100%;margin:0;}
+	.staff{height:100%;} .top .staff {width:100px;} .middle .staff{height:70px;width:66px;}
+
+/* Blank */
+	#rockB .middle .southStairBathroom .blank{height:48px;}
+	#rockA .right .blank, #rock2 .right .blank  {width:100px;height:76px;margin:0 0 20px -25px;}
+	#rockA .middle .blank{height:56px;width:34px;margin:70px 0 0 15px;}
+	#rock1 .left .bottom .blank{width:70px;height:50%;}	
+	#rock3 .middle .blankR, #rock4 .middle .blankR{height:35px;width:30px;margin-top:36px;}
+	#rock3 .middle .blankL, #rock4 .middle .blankL{height:65px;width:60px;margin-top:36px;}
+
+/* Study */
+	.study {height:100%;width:333px;overflow:hidden;} #rock2 .middle .study{width:140px;} #rock1 .middle .study{width:140px;} #rockA .middle .study{width:108px;}  
+	.bottom .study{width:111px;height:40px;}
+	#rock1 .right .study{width:212px;margin-left:-25px;}
+	#rock2 .right .study{width:212px;margin:0 0 0 -25px;}
+	
+/* Stairs & Blank */
+	.mainStair{width:117px;height:61px;} #rock1 .mainStair{margin-top:20px;} #rockA .mainStair{width:100px;height:41px;}
+	.southStairBathroom{height:100%;width:60px;margin-left:15px;}
+		.southStair{width:66px;height:56px;} #rockA .southStair {margin-top:100px;}  #rock2 .southStair {margin-top:70px;} #rockB .southStair{margin-top:42px;} #rock1 .southStair{margin-right:34px;}
+	.elevatorNorthStair{height:100%;width:108px;} #rockB .elevatorNorthStair{margin-left:100px;} #rockA .elevatorNorthStair, #rock1 .elevatorNorthStair, #rock2 .elevatorNorthStair {margin-top:0px;} #rock1 .elevatorNorthStair, #rock1 .middle .blank{height:126px;}#rock1 .middle .blank{width:60px;}
+		.elevator{height:50%;width:100%;} #rock3 .elevatorNorthStair, #rock4 .elevatorNorthStair{margin-right:25px;}
+		.northStair{height:50%;width:100%;}
+
+/* Bathroom */	
+	.bathroom{width:66px;height:70px;} 
+	.bottom .bathroom{width:75px;height:41px;} #rock2 .bottom .bathroom{width:108px;height:41px;}
+
+/* Rows & Cols & Labels */
+
+			#rock1 .left .col{height:40%;}
+			#rock1 .left .col .stacks{height:85%;}
+			#rock1 .left .col .label{height:15%;}
+			#rock1 .left .col .a{height:100%;}
+			
+			
+			#rock1 .padder .right .col .a{width:100%;margin:0;}
+			#rock1 .padder .right .stacks{width:100%;}
+			
+			#r111{height:14px;width:70%;margin-bottom:20px;}
+				#r111 .label{height:50%;}
+			#r112{height:60px;width:23%;} 
+				#r112 .label{height:30%;}
+			#r113{height:150px;width:50%;margin-right:10%;}
+			#rA52.col{margin-left:15px;}
+			#r10{height:120px;width:100px;}
+			#r15 {margin-right:16%;}
+			#rB1.col{width:30px}
+			
+			/*
+	#rock1 .stacks{height:85%;}
+	#rock1 .label{height:15%;}
+	
+	#rA52.col{margin-left:15px;}
+	
+	#rock1 .row .label, #rock1 .col .label{background:#E4E7F1;}
+	#rock1 .row .label, #rock1 .col .label{background:#E4E7F1;}
+	#r111 .b,#r112 .a {height:100%;}
+	#r111.row{width:50%;margin-left:5%;}
+	#r111 .label, #r112 .label{position:absolute;height:1px;width:1px;}	
+	#r111 .stacks, #r112 .stacks, #r113 .stacks{width:100%;height:100%;}	
+	#r112{height:60px;width:20%;margin-top:30px;}
+ 	#r113{height:120px;width:40%;margin:10% 10% 0 0;} */
+	
+
+/* Miscellaneous Items */
+
+/* Backgrounds */
+	.bottom, .middle, .top, .corridor, #rock3 .padder, #rock4 .padder{background:#fff;}
+	
+/*Fonts*/
+	#r1reserves p{width:75px;height:75px;}
+
+	

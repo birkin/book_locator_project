@@ -1,0 +1,190 @@
+/*CSS Maps for Locator*/
+/*questions, comments, feedback, suggestions: taylor_russell@brown.edu*/
+
+/*********************			TABLE OF CONTENTS 			*********************
+	0: Basic Info
+		0.1 Notes
+		0.2 Nomenclature
+	1: Architectures
+		1.1 Page Elements  ............................................ Line
+		1.2 Padder  .................................................. Line
+		1.3 Vertical Divisions  ......................................... Line
+		1.4 Horizontal Divisions  ....................................... Line
+		1.5 Corridor  ................................................. Line
+	2: Content Blocks
+		1.2 Staff  .................................................... Line
+		2.2 Blank  ................................................... Line
+		2.3 Study  ................................................... Line
+		2.4 Stairs & Blank  ............................................ Line
+		2.5 Bathroom  ................................................ Line
+		2.6 Rows & Cols & Labels  ...................................... Line
+		2.7 Miscellaneous Itens  ........................................ Line
+	3: Appearance
+		3.1 Backgrounds  .............................................. Line
+		3.2 Fonts  .................................................... Line
+		3.3 Hover Fun  ................................................ Line
+		3.4 Highlighting A Stack  ....................................... Line
+*/
+
+/* Notes 
+	~Level B has a few stacks highlighted to demo. 
+	~I've tested it on several browsers and seems to render about the same across all of them. If any issues come up let me know
+	~Shelf numbers are arbitrary at this point, so be prepared for the backend to highlight the right numbered shelf which is physically located in the wrong place.
+	~It could obviously use some styling as well, for which I'm open to suggestions
+*/
+
+/* Nomenclature */
+	/*Format: [library][floor][stack#] <div class="row" id="rB1"> */
+
+/* Page Elements */
+	body{font: bold 11px "trebuchet ms";}
+
+/* Padder */
+
+/* Vertical Divisions */
+
+/* Horizontal Divisions */
+
+/*Corridor*/
+
+/*Staff */
+
+/* Blank */
+
+/* Study */
+	
+/* Stairs & Blank */
+
+/* Bathroom */	
+	.bathroom{width:66px;height:70px;} 
+	.bottom .bathroom{width:108px;height:81px;}
+
+/* Rows & Cols & Labels */
+	.stackHolder{height:100%;width:100%;}
+	.col{height:100%;float:left;width:16px;} 
+		.col .label {text-align:center;width:100%;height:10%;} .subBottom .col  .label, .middle .subLeft .col .label{height:20%;}
+		.col .stacks {height:90%;width:100%;margin:0 auto;} .subBottom .col .stacks, .middle .subLeft .col .stacks{height:80%;}
+			.col .stacks .a{float:left;width:36%;height:100%;margin-left:18%;}
+			.col .stacks .b{float:left;width:36%;height:100%;}
+			#rock1 .left .col{height:40%;}
+	.row{height:16px;width:100%;}
+		.row .label{text-align:left;float:left;height:100%;width:20%;}
+		.row .stacks {width:80%;float:right;height:100%;}
+			.row .stacks .a{width:100%;height:36%;margin-top:2px;}
+			.row .stacks .b{width:100%;height:36%;margin:auto;}
+
+/* Miscellaneous Items */
+	.FL{float:left;} .FR{float:right;} .clear{clear:both;} 
+	
+		.floor{height:15px;border-bottom:2px solid #F0E0CF;}
+
+/* Backgrounds */
+
+		.bathroomSouthStair{background:#c0c0c0;}	
+			.bathroom{background: #fff url('../img/bathrooms.gif') no-repeat top center;}
+		.elevatorNorthStair{background:#c0c0c0;}
+			.elevator{background: #fff url('../img/publicElevator.gif') no-repeat  top center;}
+			.stair{background: #fff url('../img/stairs.gif') no-repeat top center;}
+		.study, .gradCluster {background:#E4E7F1;} 
+		.staff, .blank{background:#f8f8f8;}
+		/* .label{background:#fff;}	 */
+		.stacks, .circulation, .floor{background:#FEF6ED;}
+			.a, .b{background:#F0E0CF;}	
+		
+		.floorContainer{background:#f8f8f8;}
+		.floor{background:#FEF6ED;}
+		.current{background:#F0E0CF;}
+/*Fonts*/
+	.staff, .blank, .corridor, .stair, .elevator, .bathroom, .study{}
+	.top .study p{margin-top:20px;font-size:1.5em} .bottom .study p{margin-top:5px;font-size:1.5em}
+	.study, .gradCluster {color:#9BA6C4;} 
+	.label{font:bold .8em/1em verdana, sans-serif;} .label, p{color:#c0c0c0;}
+	p, .label{text-indent:0em;}
+	.floor{font:1em/1.5em "trebuchet ms", serif;color:#c0c0c0;}
+		.floorContainer h1{font-size:1em;line-height:1em;}
+	.current{font-weight:bold;color:#000;}
+
+
+/* Highlighting A Stack */
+	.activeA .label, .activeB .label, .activeA .stacks, .activeB .stacks{color:black;background:yellow;}
+	.activeA .a, .activeB .b{background:#600;} 
+	.activeA .b, .activeB .a{background:#E7CEB3}
+	
+/*METHOD 2: Highlight stack directly from stylesheet*/
+	
+/****************************** HIGHLIGHTING STACK ******************************/
+/*METHOD 1: . Add the class "activeA" or "activeB" to the stack with the book then the stylesheet will highlight. */
+/* ... <div class="stackHolder"><div class="stacks"><div class="a"></div><div class="b"></div></div>/div> ... */
+/* ... turns into ... */
+/* ... <div class="stackHolder activeA"><div class="stacks"><div class="a"></div><div class="b"></div></div></div> ... */
+/* go to levelB.html, line 30*/
+
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+p { 
+	font-weight: normal;
+}
+
+/*Styles for lightbox*/
+a {
+	text-decoration: none;
+	color: #0033cc;
+}
+
+#checkedOut {
+	border: 2px solid #990000;
+	padding: 5px 0px 5px 10px;
+	font: bold;
+}
+#checkedOut p {
+	color: black;
+	font-size:15px;
+}
+.checkedOut {
+	color: #990000;
+	font-size:15px;
+}
+#title {
+	position: relative;
+	float: left;
+	width: 85%;
+	font-size:15px;
+	font-weight: bold;
+	padding-top: .25em;
+	padding-bottom: .5em;
+}
+#location {
+	font-size: 15px;
+	font-weight: normal;
+}
+#printbutton {
+	position: relative;
+	float: right;
+	margin-left: 10px;
+}
+
+#sms {
+	position: relative;
+	float: right;
+	margin-left: 10px;
+}
+#sms_place_holder {
+	visibility:hidden;
+	display:none;
+	top:50px;
+}
+.status {
+	font-weight: normal;
+}
+
+.checked-out {
+	color: #990000;
+}
+
+.checked-out a{
+	margin-left: 5px;
+	font-variant: small-caps;
+}
+

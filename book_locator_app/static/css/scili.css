@@ -1,0 +1,73 @@
+/* Page Elements */
+	.container {
+		
+		width:600px;
+		height:350px;
+	}
+	.floorContainer{position:relative;float:left;width:125px;padding-bottom:15px;top:0;margin-right:10px;}
+	.bookinfo {
+		margin-left:30px;
+		width: 535px;
+	}
+	.bookinfo p {
+		margin-top:0px;
+		color:#000000;
+		font-size:15px;
+	}
+	.bookinfo h1 {
+		margin-top: 15px;
+	}
+	
+/* Padder */
+	 .padder{position:relative;float:left;height:100%;width:400px;margin:0;} 
+
+/* Vertical Divisions */
+	.top, .bottom{width:100%;height:18%;}	
+	.middle{width:80%;height:80%;margin:0 0 0 10%;}			
+	.corridor{width:100%;height:10%;}
+	
+/* Horizontal Divisions */
+	.left{width:16%;height:64%;float:left;}
+	.right{width:84%;height:64%;float:right;}
+	#scili14 .right{width:100%;}
+	
+/*Corridor*/	
+
+/*Staff */
+	.left .staff{width:100%;height:40%;}
+	#sciliA .right .middle .circulation{height:40%;width:80%;margin:0 auto 0 0;}
+/* Blank */ 
+	.top .blank, .bottom .blank{width:41%;height:100%;}
+		#scili4 .top .blank,#scili4 .bottom .blank{width:41%;height:100%;}
+		#scili14 .right .middle .blank{height:100%;width:100%;}
+		#sciliA .bottom .blank{width:100%;}
+	
+/* Study */
+	.left .study{width:100%;height:60%;}
+	#scili14 .right .middle .blank .circulation{height:50%;width:50%;margin-top:32%;}
+/* Stairs & Blank */
+	.stair, .elevator, .bathroom{width:40%;height:80%;}
+	.stair{margin-right:11%;}
+		.left .stair{width:100%;height:30%;margin-top:100%;}
+	.elevator{margin-left:16%;width:70%;}		
+	.bathroom{margin-left:45%;}	
+	.top .stair, .top .bathroom{	margin-top:5%;}/* 1/2 of (100% -70%) . 70% = element's height. */		
+	#sciliA .bottom .stair, #sciliA .bottom .bathroom, #sciliA .bottom .elevator{width:20%;}
+	#sciliA .bottom .bathroom{margin:0 0 0 6%;height:80%;}
+/* Bathroom */	
+	
+/* Rows & Cols & Labels */
+
+/* Miscellaneous Items */
+
+
+/* Backgrounds */
+	.padder{background:#fff;}
+	#sciliA .padder{background:#E4E7F1;}
+		
+/*Fonts*/
+#scili14 .right .middle .blank .circulation{line-height:7em;}
+/* Hover Fun */
+
+/* Highlighting A Stack */
+
