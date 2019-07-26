@@ -61,7 +61,14 @@ def map( request ):
         'title': title,
     }
 
-    resp = render( request, item_template, context )
+    log.debug( f'context, ```{pprint.pformat(context)}```' )
+
+    try:
+        resp = render( request, item_template, context )
+        # resp = render( request, 'book_locator_app_templates/rock_item.html', context )
+    except:
+        log.exception( 'grrrr' )
+    log.debug( f'type(resp), ```{type(resp)}```' )
 
     return resp
 
@@ -81,9 +88,7 @@ def map( request ):
     #     floor=floor_template
     # )
 
-
-
-    return HttpResponse( 'coming' )
+    # return HttpResponse( 'coming' )
 
 
 def info( request  ):
