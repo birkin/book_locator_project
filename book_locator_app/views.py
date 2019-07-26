@@ -63,11 +63,15 @@ def map( request ):
 
     log.debug( f'context, ```{pprint.pformat(context)}```' )
 
-    try:
-        resp = render( request, item_template, context )
-        # resp = render( request, 'book_locator_app_templates/rock_item.html', context )
-    except:
-        log.exception( 'grrrr' )
+    # resp = render( request, 'book_locator_app_templates/base_test.html', context )  # works
+    # resp = render( request, 'book_locator_app_templates/item_test.html', context )
+
+    resp = render( request, item_template, context )
+    # try:
+    #     resp = render( request, item_template, context )
+    #     # resp = render( request, 'book_locator_app_templates/rock_item.html', context )
+    # except:
+    #     log.exception( 'grrrr' )
     log.debug( f'type(resp), ```{type(resp)}```' )
 
     return resp
