@@ -20,38 +20,29 @@ bk_locator = ServiceLocator()
 def map( request ):
     """ Manages build and display of map. """
     log.debug( 'map hit' )
-    ## check params
-    # location = request.GET.get( 'loc', None )
-    # call_number = request.GET.get( 'call', None )
-    # ( location, call_number ) = view_map_helper.parse_request( request.GET )
-    ( location, call_number, status, title ) = view_map_helper.parse_request( request.GET )
 
+    ## check params
+    ( location, call_number, status, title ) = view_map_helper.parse_request( request.GET )
     if ( location is None ) or ( call_number is None ):
         return HttpResponseBadRequest( '400 / Bad Request -- Location and call number required.' )
     log.debug( f'Map requested for location ```{location}``` and call_number ```{call_number}```' )
+
     ## check location
     if location.lower() not in settings_app.LOCATE_LOCATIONS:
         return HttpResponseNotFound( '404 / Not Found -- No maps for this location.' )
 
-    item_key = f'{location}-{call_number.strip()}'
-    log.debug( f'item_key, ```{item_key}```' )
+    # item_key = f'{location}-{call_number.strip()}'
+    # log.debug( f'item_key, ```{item_key}```' )
 
     loc_data = bk_locator.run(call_number.strip(), location)
     log.debug( f'loc_data, ```{loc_data}```' )
 
-    # status = request.GET.get( 'status', None )
-    # log.debug( f'status, ```{status}```' )
-
     floor = loc_data['floor']
     log.debug( f'floor, ```{floor}```' )
-
-    # title = request.GET.get( 'title', None )
-    # log.debug( f'title, ```{title}```' )
 
     floor_template = f'book_locator_app_templates/locations/{location}{floor}.html'
     log.debug( f'floor_template, ```{floor_template}```' )
 
-    # item_template = "maps/{}_item.html".format(location),
     item_template = f'book_locator_app_templates/{location}_item.html'
     log.debug( f'item_template, ```{item_template}```' )
 
@@ -66,17 +57,7 @@ def map( request ):
 
     log.debug( f'context, ```{pprint.pformat(context)}```' )
 
-    # resp = render( request, 'book_locator_app_templates/base_test.html', context )  # works
-    # resp = render( request, 'book_locator_app_templates/item_test.html', context )
-
     resp = render( request, item_template, context )
-    # try:
-    #     resp = render( request, item_template, context )
-    #     # resp = render( request, 'book_locator_app_templates/rock_item.html', context )
-    # except:
-    #     log.exception( 'grrrr' )
-    log.debug( f'type(resp), ```{type(resp)}```' )
-
     return resp
 
 
