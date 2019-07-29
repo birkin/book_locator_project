@@ -37,7 +37,8 @@ class ServiceLocator():
                     LocateData(loc, meta=True).load()
                  )
             except IOError:
-                log.error("Could not load meta or index for {}.".format(loc))
+                log.exception( f'Could not load meta or index for ```{loc}```.' )
+                # log.error("Could not load meta or index for {}.".format(loc))
 
     def _data(self, normalized, location):
         index = getattr(self, "{}_index".format(location))
@@ -100,7 +101,10 @@ class LocateData(object):
 
     def _data_filename(self, prefix):
         fn = "{}_{}.json".format(self.location, self.prefix)
-        return os.path.join(settings_app.DATA_DIR, fn)
+        log.debug( f'filename, ```{fn}```' )
+        filepath = os.path.join(settings_app.DATA_DIR, fn)
+        log.debug( f'filepath, ```{filepath}```' )
+        return filepath
 
     def dump(self, data):
         fn = self._data_filename(self.location)
