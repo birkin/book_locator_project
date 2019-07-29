@@ -34,10 +34,10 @@ class MapHelperTest( TestCase ):
 
     def test_parse_request__non_encoded_spaces(self):
         """ Checks location with non-encoded spaces. """
-        querydct = {'loc': 'rock', 'call': 'BL1442.Z4 B59 v.1'}
-        self.assertEqual( ('rock', 'BL1442.Z4 B59 v.1'), view_map_helper.parse_request(querydct) )
+        querydct = {'loc': 'rock', 'call': 'BL1442.Z4 B59 v.1', 'title': 'Zen and Zen classics'}
+        self.assertEqual( ('rock', 'BL1442.Z4 B59 v.1', None, 'Zen and Zen classics' ), view_map_helper.parse_request(querydct) )  # the `None` is the perceived `status`.
 
     def test_parse_request__encoded_spaces(self):
         """ Checks location with non-encoded spaces. """
-        querydct = {'loc': 'rock', 'call': 'BL1442.Z4%20B59%20v.1'}
-        self.assertEqual( ('rock', 'BL1442.Z4 B59 v.1'), view_map_helper.parse_request(querydct) )
+        querydct = {'loc': 'rock', 'call': 'BL1442.Z4%20B59%20v.1', 'title': 'Zen%20and%20Zen%20classics'}
+        self.assertEqual( ('rock', 'BL1442.Z4 B59 v.1', None, 'Zen and Zen classics'), view_map_helper.parse_request(querydct) )
