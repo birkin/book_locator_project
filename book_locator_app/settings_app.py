@@ -6,6 +6,8 @@ import json, logging, os
 log = logging.getLogger(__name__)
 
 
+## webapp
+
 README_URL = os.environ['BK_LCTR__README_URL']
 
 INFO_URL = os.environ['BK_LCTR__README_URL']
@@ -14,6 +16,11 @@ LOCATE_LOCATIONS = ['rock', 'sci']
 
 DATA_DIR = os.environ['BK_LCTR__DATA_DIR_PATH']  # data saved from google-sheet
 log.debug( f'DATA_DIR, ```{DATA_DIR}``' )
+
+
+## indexer
+
+GSHEET_KEY_PATH = os.environ['BK_LCTR__GSHEET_KEY_PATH']
 
 
 ## auth
