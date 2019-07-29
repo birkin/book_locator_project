@@ -37,7 +37,7 @@ logging.basicConfig(
 logging.getLogger("oauth2client").setLevel(logging.WARNING)
 
 
-# log = logging.getLogger( 'book_locator_indexer' )
+log = logging.getLogger( 'book_locator_indexer' )
 
 
 try:
@@ -53,13 +53,13 @@ META_FILE = 'data/.meta.pkl'
 # Setup Google Spreadsheet connection.
 #
 with open( settings_app.GSHEET_KEY_PATH ) as f:
-    json_key = f.read()
-log.debug( f'json_key, ```{json_key}```' )
+    json_key_str = f.read()
+log.debug( f'json_key_str, ```{json_key_str}```; type(json_key_str), `{type(json_key_str)}`' )
+json_key = json.loads( json_key_str )
 
 scope='https://spreadsheets.google.com/feeds'
 # credentials = SignedJwtAssertionCredentials(json_key['client_email'], json_key['private_key'].encode(), scope)
-credentials = ServiceAccountCredentials( json_key['client_email'], json_key['private_key'].encode(), scope )
-
+credentials = ServiceAccountCredentials.from_json_keyfile_name( settings_app.GSHEET_KEY_PATH, scope )
 gc = gspread.authorize(credentials)
 
 
