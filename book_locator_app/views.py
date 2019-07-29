@@ -2,7 +2,7 @@
 
 import datetime, json, logging, os, pprint
 from . import settings_app
-from book_locator_app.lib import view_version_helper
+from book_locator_app.lib import view_map_helper, view_version_helper
 from book_locator_app.lib.locator import ServiceLocator
 # from book_locator_app.lib.shib_auth import shib_login  # decorator
 from django.conf import settings as project_settings
@@ -21,8 +21,10 @@ def map( request ):
     """ Manages build and display of map. """
     log.debug( 'map hit' )
     ## check params
-    location = request.GET.get( 'loc', None )
-    call_number = request.GET.get( 'call', None )
+    # location = request.GET.get( 'loc', None )
+    # call_number = request.GET.get( 'call', None )
+    ( location, call_number ) = view_map_helper.parse_request( request.GET )
+
     if ( location is None ) or ( call_number is None ):
         return HttpResponseBadRequest( '400 / Bad Request -- Location and call number required.' )
     log.debug( f'Map requested for location ```{location}``` and call_number ```{call_number}```' )
