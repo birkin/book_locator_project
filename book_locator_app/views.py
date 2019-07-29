@@ -22,41 +22,39 @@ def map( request ):
     log.debug( 'map hit' )
 
     ## check params
-    ( location, call_number, status, title ) = view_map_helper.parse_request( request.GET )
-    if ( location is None ) or ( call_number is None ):
+    ( location, callnumber, status, title ) = view_map_helper.parse_request( request.GET )
+    if ( location is None ) or ( callnumber is None ):
         return HttpResponseBadRequest( '400 / Bad Request -- Location and call number required.' )
-    log.debug( f'Map requested for location ```{location}``` and call_number ```{call_number}```' )
+    log.debug( f'Map requested for location ```{location}``` and callnumber ```{callnumber}```' )
 
     ## check location
     if location.lower() not in settings_app.LOCATE_LOCATIONS:
         return HttpResponseNotFound( '404 / Not Found -- No maps for this location.' )
 
-    # item_key = f'{location}-{call_number.strip()}'
-    # log.debug( f'item_key, ```{item_key}```' )
-
-    loc_data = bk_locator.run(call_number.strip(), location)
+    ## prepare data
+    loc_data = bk_locator.run( callnumber.strip(), location )
     log.debug( f'loc_data, ```{loc_data}```' )
-
     floor = loc_data['floor']
     log.debug( f'floor, ```{floor}```' )
-
     floor_template = f'book_locator_app_templates/locations/{location}{floor}.html'
     log.debug( f'floor_template, ```{floor_template}```' )
 
-    item_template = f'book_locator_app_templates/{location}_item.html'
-    log.debug( f'item_template, ```{item_template}```' )
-
+    ## assemble data
     context = {
-        'call_number': call_number,
+        'callnumber': callnumber,
         'floor_template': floor_template,
         'item': loc_data,
         'location': location,
         'status': status,
         'title': title,
     }
-
     log.debug( f'context, ```{pprint.pformat(context)}```' )
 
+    ## spec template based on location
+    item_template = f'book_locator_app_templates/{location}_item.html'
+    log.debug( f'item_template, ```{item_template}```' )
+
+    ## render response
     resp = render( request, item_template, context )
     return resp
 
