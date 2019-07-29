@@ -1,9 +1,16 @@
 # -*- coding: utf-8 -*-
 
-import bisect, json, logging, os
+"""
+- Loads datafile (produced via cronjob that accesses a googledoc-sheet),
+- Gets a normalized callnumber.
+- Looks up the normalized callnumber in the loaded data.
+- Returns location info.
+"""
+
+import bisect, json, logging, os, pprint
 
 from book_locator_app import settings_app
-from book_locator_app.lib.normalizer import Item
+from book_locator_app.lib.normalizer import Item  # TODO: call the normalizer webservice
 
 
 log = logging.getLogger(__name__)
@@ -41,6 +48,8 @@ class ServiceLocator():
         return loc_data
 
     def run(self, callnumber, location):
+        """ Prepares location information.
+            Called by views.map() """
         if location not in self.locations:
             log.debug("Location not in possbile locations.")
         # lower case location
@@ -59,7 +68,7 @@ class ServiceLocator():
         if loc_data is not None:
             located = True
         aisle = loc_data.get('aisle').upper()
-        return {
+        location_dct = {
             'floor': str(loc_data.get('floor')).upper(),
             'aisle': aisle,
             # For display we will split out aisle and side.
@@ -70,6 +79,12 @@ class ServiceLocator():
             #Flag as to whether this item was found.
             'located': located,
             }
+        log.debug( f'location_dct, ```{pprint.pformat(location_dct)}```' )
+        return location_dct
+
+        ## end def run()
+
+    ## end class ServiceLocator
 
 
 class LocateData(object):
