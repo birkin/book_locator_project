@@ -42,7 +42,7 @@ class ServiceLocator():
 
     def run(self, callnumber, location):
         if location not in self.locations:
-            logger.debug("Location not in possbile locations.")
+            log.debug("Location not in possbile locations.")
         # lower case location
         location = location.strip().lower()
         # upcase call numbers
@@ -52,7 +52,7 @@ class ServiceLocator():
             item = Item( callnumber, location )
             normalized_callnumber = item.normalize().upper()
         except AttributeError:
-            logger.info("Could not normalize callnumber {}.".format(callnumber))
+            log.info("Could not normalize callnumber {}.".format(callnumber))
             return None
         loc_data = self._data(normalized_callnumber, location)
         located = False
