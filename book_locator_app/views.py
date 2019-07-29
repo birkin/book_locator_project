@@ -2,7 +2,7 @@
 
 import datetime, json, logging, os, pprint
 from . import settings_app
-from book_locator_app.lib import view_info_helper
+from book_locator_app.lib import view_version_helper
 from book_locator_app.lib.locator import ServiceLocator
 # from book_locator_app.lib.shib_auth import shib_login  # decorator
 from django.conf import settings as project_settings
@@ -77,24 +77,6 @@ def map( request ):
     return resp
 
 
-
-    # status = request.args.get('status')
-    # floor = loc_data['floor']
-    # floor_template = "maps/locations/{}{}.html".format(location, floor)
-    # title = request.args.get('title')
-    # return render_template(
-    #     "maps/{}_item.html".format(location),
-    #     location=location,
-    #     call_number=call_number,
-    #     title=title,
-    #     status=status,
-    #     item=loc_data,
-    #     floor=floor_template
-    # )
-
-    # return HttpResponse( 'coming' )
-
-
 def info( request  ):
     """ Redirects to something useful. """
     log.debug( 'info hit' )
@@ -105,12 +87,12 @@ def version( request ):
     """ Returns basic data including branch & commit. """
     # log.debug( 'request.__dict__, ```%s```' % pprint.pformat(request.__dict__) )
     rq_now = datetime.datetime.now()
-    commit = view_info_helper.get_commit()
-    branch = view_info_helper.get_branch()
+    commit = view_version_helper.get_commit()
+    branch = view_version_helper.get_branch()
     info_txt = commit.replace( 'commit', branch )
     resp_now = datetime.datetime.now()
     taken = resp_now - rq_now
-    context_dct = view_info_helper.make_context( request, rq_now, info_txt, taken )
+    context_dct = view_version_helper.make_context( request, rq_now, info_txt, taken )
     output = json.dumps( context_dct, sort_keys=True, indent=2 )
     return HttpResponse( output, content_type='application/json; charset=utf-8' )
 
