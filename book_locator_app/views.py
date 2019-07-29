@@ -23,7 +23,8 @@ def map( request ):
     ## check params
     # location = request.GET.get( 'loc', None )
     # call_number = request.GET.get( 'call', None )
-    ( location, call_number ) = view_map_helper.parse_request( request.GET )
+    # ( location, call_number ) = view_map_helper.parse_request( request.GET )
+    ( location, call_number, status, title ) = view_map_helper.parse_request( request.GET )
 
     if ( location is None ) or ( call_number is None ):
         return HttpResponseBadRequest( '400 / Bad Request -- Location and call number required.' )
@@ -38,14 +39,14 @@ def map( request ):
     loc_data = bk_locator.run(call_number.strip(), location)
     log.debug( f'loc_data, ```{loc_data}```' )
 
-    status = request.GET.get( 'status', None )
-    log.debug( f'status, ```{status}```' )
+    # status = request.GET.get( 'status', None )
+    # log.debug( f'status, ```{status}```' )
 
     floor = loc_data['floor']
     log.debug( f'floor, ```{floor}```' )
 
-    title = request.GET.get( 'title', None )
-    log.debug( f'title, ```{title}```' )
+    # title = request.GET.get( 'title', None )
+    # log.debug( f'title, ```{title}```' )
 
     floor_template = f'book_locator_app_templates/locations/{location}{floor}.html'
     log.debug( f'floor_template, ```{floor_template}```' )
