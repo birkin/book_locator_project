@@ -12,7 +12,7 @@ Builds two json files for each location.
 """
 
 
-import os, sys
+import os, pprint, sys
 
 assert sys.version_info.major > 2
 sys.path.append( os.environ['BK_LCTR__PROJECT_PATH'] )
@@ -147,7 +147,11 @@ def build_item(location, begin):
         # print>>sys.stderr, "Can't normalize", location, begin
         # return None
         log.exception( f"Can't normalize 'location', `{location}`, 'begin', `{begin}`" )
-    log.debug( f'from "location", `{location}` and "begin", `{begin}`; returning normalized_item, `{n}`' )
+    log_message = f'from "location", `{location}` and "begin", `{begin}`; returning normalized_item, `{n}`'
+    if n is None:
+        log.warning( log_message )
+    else:
+        log.debug( log_message )
     return n
 
 
@@ -249,16 +253,22 @@ def index_group(location_code, gid, worksheet):
     # Dump the metadata to the file system.
     ld = LocateData(location_code, meta=True)
     ld.dump(locate_index)
+    log.debug( 'metadata saved' )
 
     # Dump the index, which is a sorted listed of normalized call numbers.
-    range_start_list.sort()
+    # log.debug( f'type(range_start_list), `{type(range_start_list)}`; range_start_list, ```{pprint.pformat(range_start_list)}```' )
+    # range_start_list.sort()  # was generating error because of None elements among the strings
+    filtered_range_start_list = [ x for x in range_start_list if x ] # removes None elements before sorting
+    filtered_range_start_list.sort()
     ld = LocateData(location_code, index=True)
-    ld.dump(range_start_list)
+    ld.dump(filtered_range_start_list)
+    log.debug( 'index saved' )
 
 
 def main():
     for grp in groups:
         index_group(grp['location_code'], grp['gid'], grp.get('worksheet'))
+        # break
     set_index_last_updated()
 
 
