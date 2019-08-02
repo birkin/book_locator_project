@@ -102,6 +102,23 @@ groups = [
 ]
 
 
+# def gget(d, k):
+#     """
+#     Function to get a cell from the gspread
+#     and return None rather than an empty string.
+
+#     :param d:
+#     :param k:
+#     :return:
+#     """
+#     val = d.get(k, None)
+#     if val is None:
+#         return None
+#     elif val.strip() == u"":
+#         return None
+#     else:
+#         return val
+
 def gget(d, k):
     """
     Function to get a cell from the gspread
@@ -113,20 +130,25 @@ def gget(d, k):
     """
     val = d.get(k, None)
     if val is None:
-        return None
-    elif val.strip() == u"":
-        return None
+        return_val = None
+    elif val.strip() == '':
+        return_val = None
     else:
-        return val
+        return_val = val
+    log.debug( f'return_val, `{return_val}`' )
+    return return_val
+
 
 def build_item(location, begin):
     item = Item(begin, location)
+    n = None
     try:
         n = item.normalize()
         return n
     except ValueError:
-        print>>sys.stderr, "Can't normalize", location, begin
-        return None
+        # print>>sys.stderr, "Can't normalize", location, begin
+        # return None
+        log.exception( f"Can't normalize 'location', `{location}`, 'begin', `{begin}`" )
 
 
 def make_last_updated_date(raw):
@@ -144,8 +166,10 @@ def make_last_updated_date(raw):
 
 def load_meta():
     try:
-        with open(META_FILE) as inf:
-            return pickle.load(inf)
+        with open( META_FILE, 'rb' ) as inf:
+            info = pickle.load( inf, encoding='bytes' )
+            log.debug( f'type(info), `{type(info)}`; info, ```{info}```' )
+            return info
     except ( IOError, ValueError ) as e:
         log.exception()
         return None
