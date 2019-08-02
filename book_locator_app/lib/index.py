@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 
 """
-Create an index of the current data that will be used by the web app
-to resolve locations.
+Accesses (triggered via cron) the google-spreadsheet to
+create an index of the current data that will be used
+by the web app to resolve locations.
 
-Build two json for each location.
+Builds two json files for each location.
  - sorted list of call numbers
  - dictionary with full location information that can be used for display
 
