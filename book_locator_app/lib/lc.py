@@ -134,7 +134,8 @@ def normalize(lc, bottom=False):
     topnorm.pop()
     bottomnorm.pop()
 
-    inds = range(1, 9)
+    # inds = range(1, 9)
+    inds = list( range(1, 9) )  # py3
     inds.reverse()
     for i in inds:
         end = topnorm.pop()
