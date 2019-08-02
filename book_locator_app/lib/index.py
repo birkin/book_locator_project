@@ -22,24 +22,22 @@ from datetime import datetime
 from time import mktime
 from time import strptime
 
+import gspread
 from book_locator_app import settings_app
 from book_locator_app.lib.locator import LocateData
+from book_locator_app.lib.normalizer import Item
 from oauth2client.service_account import ServiceAccountCredentials  # py3
-import gspread
 
+# from callnumber.brown import Item
 
-# Logging
+## setup logging
 logging.basicConfig(
     # filename=settings_app.LOG_FILENAME,
     level=logging.DEBUG,
     format='[%(asctime)s] %(levelname)s [%(module)s-%(funcName)s()::%(lineno)d] %(message)s',
     datefmt='%d/%b/%Y %H:%M:%S'
     )
-
-# Turn off other loggers
 logging.getLogger("oauth2client").setLevel(logging.WARNING)
-
-
 log = logging.getLogger( 'book_locator_indexer' )
 
 
@@ -144,11 +142,13 @@ def build_item(location, begin):
     n = None
     try:
         n = item.normalize()
-        return n
+        log.debug
     except ValueError:
         # print>>sys.stderr, "Can't normalize", location, begin
         # return None
         log.exception( f"Can't normalize 'location', `{location}`, 'begin', `{begin}`" )
+    log.debug( f'from "location", `{location}` and "begin", `{begin}`; returning normalized_item, `{n}`' )
+    return n
 
 
 def make_last_updated_date(raw):
