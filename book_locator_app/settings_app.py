@@ -22,8 +22,15 @@ log.debug( f'DATA_DIR, ```{DATA_DIR}``' )
 
 GSHEET_KEY_PATH = os.environ['BK_LCTR__GSHEET_KEY_PATH']
 
+ROCK_GID = os.environ['BK_LCTR__ROCK_GID']
+SCI_GID = os.environ['BK_LCTR__SCI_GID']
+ROCK_CHINESE_GID = os.environ['BK_LCTR__ROCK_CHINESE_GID']
+ROCK_JAPANESE_GID = os.environ['BK_LCTR__ROCK_JAPANESE_GID']
+ROCK_KOREAN_GID = os.environ['BK_LCTR__ROCK_KOREAN_GID']
+
 
 ## auth
+
 # SUPER_USERS = json.loads( os.environ['BK_LCTR__UPER_USERS_JSON'] )
 # STAFF_USERS = json.loads( os.environ['BK_LCTR__STAFF_USERS_JSON'] )  # users permitted access to admin
 # STAFF_GROUP = os.environ['BK_LCTR__STAFF_GROUP']  # not grouper-group; rather, name of django-admin group for permissions
