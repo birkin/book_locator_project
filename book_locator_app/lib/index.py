@@ -50,7 +50,8 @@ except IndexError:
     log.debug( 'No `force` argument perceived' )
     FORCE_REINDEX = None
 
-META_FILE = 'data/.meta.pkl'
+# META_FILE = 'data/.meta.pkl'
+META_FILE = settings_app.META_FILEPATH
 
 
 #
