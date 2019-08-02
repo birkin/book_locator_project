@@ -32,8 +32,10 @@ import gspread
 logging.basicConfig(
     # filename=settings_app.LOG_FILENAME,
     level=logging.DEBUG,
-    format='%(asctime)s %(message)s',
-)
+    format='[%(asctime)s] %(levelname)s [%(module)s-%(funcName)s()::%(lineno)d] %(message)s',
+    datefmt='%d/%b/%Y %H:%M:%S'
+    )
+
 # Turn off other loggers
 logging.getLogger("oauth2client").setLevel(logging.WARNING)
 
@@ -77,17 +79,17 @@ groups = [
     },
     {
         'location_code': 'rock-chinese',
-        'gid': settings_app.ROCK_CHINESE,
+        'gid': settings_app.ROCK_CHINESE_GID,
         'worksheet': 'chinese'
     },
     {
         'location_code': 'rock-japanese',
-        'gid': settings_app.ROCK_JAPANESE,
+        'gid': settings_app.ROCK_JAPANESE_GID,
         'worksheet': 'japanese'
     },
     {
         'location_code': 'rock-korean',
-        'gid': settings_app.ROCK_KOREAN,
+        'gid': settings_app.ROCK_KOREAN_GID,
         'worksheet': 'korean'
     },
 ]
@@ -157,7 +159,7 @@ def check_last_update(worksheet):
         spread_updated = make_last_updated_date(worksheet.updated)
         index_updated = get_index_last_updated()
         if (index_updated) and (spread_updated < index_updated):
-            logging.info(
+            log.info(
                 "Skipping reindex because spreadsheet updated: {} and last index: {}"\
                 .format(spread_updated, index_updated)
             )
@@ -165,15 +167,19 @@ def check_last_update(worksheet):
     return True
 
 def index_group(location_code, gid, worksheet):
-    logging.info("Indexing location code: {}\nWith ID: {}".format(location_code, gid))
+    log.info("Indexing location code: ```{}```\nWith ID: ```{}```".format(location_code, gid))
     try:
         spread = gc.open_by_key(gid)
+        log.debug( f'type(spread), `{type(spread)}`' )
+        log.debug( f'spread, `{spread}`' )
     except Exception as e:
-        logging.error("Error in {}\nMessage: {}".format(gid, e.message))
+        # logging.error("Error in {}\nMessage: {}".format(gid, e.message))
+        log.exception( 'problem accessing spreadsheet' )
         raise e
 
 
     # If no worksheet is passed in, get all worksheets in spread.
+    log.debug( 'about to get `sheets`' )
     if worksheet is None:
         sheets = spread.worksheets()
     else:
@@ -192,12 +198,12 @@ def index_group(location_code, gid, worksheet):
             has_changed = True
 
     if has_changed is False:
-        logging.info("Skipping location code {}. No data changed.".format(location_code))
+        log.info("Skipping location code {}. No data changed.".format(location_code))
         return
 
     # Actually index the sheet.
     for worksheet in sheets:
-        logging.info("Indexing worksheet {}".format(worksheet.title))
+        log.info("Indexing worksheet {}".format(worksheet.title))
         for rec in worksheet.get_all_records():
             aisle_meta = rec.copy()
             begin = gget(rec, 'begin')
