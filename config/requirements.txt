@@ -1,9 +1,10 @@
 ## webapp
-Django==1.11.22
+Django==1.11.23
 git+https://github.com/birkin/shellvars-py.git
 PyMySQL==0.9.3
 requests==2.22.0
 
 ## indexer
 oauth2client==4.1.3
-gspread==3.1.0
+# gspread==3.1.0  # uses google-apis v4, which are supposed to be faster, but can't get this to work yet
+gspread==0.6.2  # uses google-apis v3, which are deprecated
