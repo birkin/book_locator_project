@@ -47,6 +47,7 @@ try:
     FORCE_REINDEX = sys.argv[1] == 'force'
     log.info("Forcing a book locator reindex")
 except IndexError:
+    log.debug( 'No `force` argument perceived' )
     FORCE_REINDEX = None
 
 META_FILE = 'data/.meta.pkl'
@@ -64,6 +65,8 @@ scope='https://spreadsheets.google.com/feeds'
 # credentials = SignedJwtAssertionCredentials(json_key['client_email'], json_key['private_key'].encode(), scope)
 credentials = ServiceAccountCredentials.from_json_keyfile_name( settings_app.GSHEET_KEY_PATH, scope )
 gc = gspread.authorize(credentials)
+log.debug( f'type(gc), ```{type(gc)}```' )
+log.debug( f'gc, ```{gc}```' )
 
 
 # List of gsheets and location codes that we will index.  These
