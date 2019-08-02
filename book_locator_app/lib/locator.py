@@ -91,6 +91,7 @@ class ServiceLocator():
 class LocateData(object):
 
     def __init__(self, location, index=False, meta=False):
+        log.debug( f'location, `{location}`; index, `{index}`; meta, `{meta}`' )
         if (index is False) and (meta is False):
             raise Exception("Either index or meta must be true")
         self.location = location
@@ -106,10 +107,16 @@ class LocateData(object):
         log.debug( f'filepath, ```{filepath}```' )
         return filepath
 
+    # def dump(self, data):
+    #     fn = self._data_filename(self.location)
+    #     with open(fn, 'wb') as pfile:
+    #         json.dump(data, pfile)
+    #     return True
+
     def dump(self, data):
         fn = self._data_filename(self.location)
-        with open(fn, 'wb') as pfile:
-            json.dump(data, pfile)
+        with open( fn, 'w' ) as pfile:
+            json.dump( data, pfile, indent=2 )
         return True
 
     def load(self):
