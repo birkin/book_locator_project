@@ -11,7 +11,6 @@ Builds two json files for each location.
 
 """
 
-
 import os, pprint, sys
 
 assert sys.version_info.major > 2
@@ -28,11 +27,10 @@ from book_locator_app.lib.locator import LocateData
 from book_locator_app.lib.normalizer import Item
 from oauth2client.service_account import ServiceAccountCredentials  # py3
 
-# from callnumber.brown import Item
 
 ## setup logging
 logging.basicConfig(
-    # filename=settings_app.LOG_FILENAME,
+    filename=settings_app.INDEXER_LOG_PATH,
     level=logging.DEBUG,
     format='[%(asctime)s] %(levelname)s [%(module)s-%(funcName)s()::%(lineno)d] %(message)s',
     datefmt='%d/%b/%Y %H:%M:%S'
@@ -48,7 +46,6 @@ except IndexError:
     log.debug( 'No `force` argument perceived' )
     FORCE_REINDEX = None
 
-# META_FILE = 'data/.meta.pkl'
 META_FILE = settings_app.META_FILEPATH
 
 
@@ -99,23 +96,6 @@ groups = [
     },
 ]
 
-
-# def gget(d, k):
-#     """
-#     Function to get a cell from the gspread
-#     and return None rather than an empty string.
-
-#     :param d:
-#     :param k:
-#     :return:
-#     """
-#     val = d.get(k, None)
-#     if val is None:
-#         return None
-#     elif val.strip() == u"":
-#         return None
-#     else:
-#         return val
 
 def gget(d, k):
     """
