@@ -35,6 +35,8 @@ ROCK_KOREAN_GID = os.environ['BK_LCTR__ROCK_KOREAN_GID']
 
 META_FILEPATH = os.environ['BK_LCTR__META_PICKLE_FILEPATH']
 
+INDEXER_LOG_PATH = os.environ['BK_LCTR__INDEXER_LOG_PATH']
+
 
 ##################################################
 ## auth
