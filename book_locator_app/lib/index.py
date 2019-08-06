@@ -168,6 +168,7 @@ def make_last_updated_date(raw):
     dt = datetime.fromtimestamp(mktime(upd))
     return dt
 
+
 def load_meta():
     try:
         with open( META_FILE, 'rb' ) as inf:
@@ -178,16 +179,19 @@ def load_meta():
         log.exception()
         return None
 
+
 def get_index_last_updated():
     meta = load_meta()
     if meta is not None:
         return meta.get('updated')
+
 
 def set_index_last_updated(timestamp=datetime.utcnow()):
     meta = load_meta() or {}
     meta['updated'] = timestamp
     with open(META_FILE, 'wb') as outf:
         pickle.dump(meta, outf)
+
 
 def check_last_update(worksheet):
     if FORCE_REINDEX is not True:
@@ -201,12 +205,13 @@ def check_last_update(worksheet):
             return False
     return True
 
+
 def index_group(location_code, gid, worksheet):
-    log.info("Indexing location code: ```{}```\nWith ID: ```{}```".format(location_code, gid))
+    log.info( f'location code, ```{location_code}```; gid, ```{gid}```' )
     try:
-        spread = gc.open_by_key(gid)
-        log.debug( f'type(spread), `{type(spread)}`' )
-        log.debug( f'spread, `{spread}`' )
+        spread = gc.open_by_key( gid )
+        # log.debug( f'type(spread), `{type(spread)}`' )
+        log.debug( f'spread, `{spread}`' )  # will show name and gid
     except Exception as e:
         # logging.error("Error in {}\nMessage: {}".format(gid, e.message))
         log.exception( 'problem accessing spreadsheet' )
@@ -267,9 +272,11 @@ def index_group(location_code, gid, worksheet):
 
 def main():
     for grp in groups:
+        log.debug( f'grp, ```{pprint.pformat(grp)}```' )
         index_group(grp['location_code'], grp['gid'], grp.get('worksheet'))
         # break
     set_index_last_updated()
+    log.debug( 'indexing complete' )
 
 
 if __name__ == "__main__":
