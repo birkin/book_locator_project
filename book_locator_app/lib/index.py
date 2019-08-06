@@ -37,6 +37,7 @@ logging.basicConfig(
     )
 logging.getLogger("oauth2client").setLevel(logging.WARNING)
 log = logging.getLogger( 'book_locator_indexer' )
+log.info( 'starting index...' )
 
 
 try:
@@ -54,14 +55,11 @@ META_FILE = settings_app.META_FILEPATH
 #
 with open( settings_app.GSHEET_KEY_PATH ) as f:
     json_key_str = f.read()
-log.debug( f'json_key_str, ```{json_key_str}```; type(json_key_str), `{type(json_key_str)}`' )
+# log.debug( f'json_key_str, ```{json_key_str}```; type(json_key_str), `{type(json_key_str)}`' )
 json_key = json.loads( json_key_str )
 
-# scope='https://spreadsheets.google.com/feeds'
 scope = ['https://spreadsheets.google.com/feeds', 'https://www.googleapis.com/auth/drive']
 
-
-# credentials = SignedJwtAssertionCredentials(json_key['client_email'], json_key['private_key'].encode(), scope)
 credentials = ServiceAccountCredentials.from_json_keyfile_name( settings_app.GSHEET_KEY_PATH, scope )
 gc = gspread.authorize(credentials)
 log.debug( f'type(gc), ```{type(gc)}```' )
