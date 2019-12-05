@@ -65,6 +65,11 @@ def info( request  ):
     return HttpResponseRedirect( settings_app.INFO_URL )
 
 
+# ===========================
+# for development convenience
+# ===========================
+
+
 def version( request ):
     """ Returns basic data including branch & commit. """
     # log.debug( 'request.__dict__, ```%s```' % pprint.pformat(request.__dict__) )

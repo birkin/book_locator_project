@@ -41,11 +41,17 @@ class ServiceLocator():
                 # log.error("Could not load meta or index for {}.".format(loc))
 
     def _data(self, normalized, location):
+        log.debug( f'normalized param, `{normalized}`; location param, `{location}`' )
         index = getattr(self, "{}_index".format(location))
+        log.debug( f'index, `{index}`' )
         meta = getattr(self, "{}_meta".format(location))
+        log.debug( f'meta, `{meta}`' )
         position = bisect.bisect(index, normalized)
+        log.debug( f'position, `{position}`' )
         meta_key = index[position - 1]
+        log.debug( f'meta_key, `{meta_key}`' )
         loc_data = meta.get(meta_key)
+        log.debug( f'loc_data returned, ```{loc_data}```' )
         return loc_data
 
     def run(self, callnumber, location):
