@@ -17,6 +17,8 @@ urlpatterns = [
 
     url( r'^map/', views.map, name='map_url' ),
 
+    url( r'^print_labels/', views.print_labels, name='labels_url' ),
+
     url( r'^info/', views.info, name='info_url' ),
 
     url( r'^version/$', views.version, name='version_url' ),
