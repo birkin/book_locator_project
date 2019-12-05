@@ -59,6 +59,45 @@ def map( request ):
     return resp
 
 
+def print_labels( request ):
+    """ Manages labels for signage. """
+    data = {
+        'range_list': [
+        {   'range_start': '65A',
+            'callnumber_start': '2-SIZE N1 A25 v.8',
+            'callnumber_end': '2-SIZE N9 J2 7',
+            'building': 'Rock',
+            'level': 'A',
+            'date': '11/19' },
+        {   'range_start': '65B',
+            'callnumber_start': '2-SIZE N9 J2 8',
+            'callnumber_end': '2-SIZE NA1288 S94 1998',
+            'building': 'Rock',
+            'level': 'A',
+            'date': '11/19' },
+        {   'range_start': '66A',
+            'callnumber_start': 'N123456 A25 v.8',
+            'callnumber_end': 'N901234 J2 7',
+            'building': 'Rock',
+            'level': 'A',
+            'date': '11/19' },
+        {   'range_start': '66B',
+            'callnumber_start': 'P123456 A25 v.8',
+            'callnumber_end': 'P901234 J2 7',
+            'building': 'Rock',
+            'level': 'A',
+            'date': '11/19' },
+        ] }
+    if request.GET.get('format', '') == 'json':
+        resp = HttpResponse( json.dumps(data, sort_keys=True, indent=2), content_type='application/json; charset=utf-8' )
+    else:
+        resp = render( request, 'book_locator_app_templates/print_labels.html', data )
+    log.debug( 'returning resp' )
+    return resp
+
+    return HttpResponse( 'labels under construction' )
+
+
 def info( request  ):
     """ Redirects to something useful. """
     log.debug( 'info hit' )

@@ -1,0 +1,32 @@
+{% load staticfiles %}
+
+<!doctype html>
+<html>
+<head>
+<title>LABELS</title>
+
+<!--CSS-->
+<link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css"/>
+<link href="{% static 'css/print.css' %}" rel="stylesheet" type="text/css" media="print" />
+
+
+</head>
+
+<body>
+
+{% for entry in range_list %}
+
+<p>{{ entry.range_start }}</p>
+<p>{{ entry.callnumber_start }}</p>
+<p>{{ entry.callnumber_end }}</p>
+<p>{{ entry.building }}</p>
+<p>{{ entry.level }}</p>
+<p>{{ entry.date }}</p>
+
+<hr/>
+
+{% endfor %}
+
+</body>
+
+</html>
