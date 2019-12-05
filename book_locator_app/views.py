@@ -1,15 +1,18 @@
 # -*- coding: utf-8 -*-
 
 import datetime, json, logging, os, pprint
+
 from . import settings_app
+from book_locator_app.lib import label_helper
 from book_locator_app.lib import view_map_helper, view_version_helper
 from book_locator_app.lib.locator import ServiceLocator
-# from book_locator_app.lib.shib_auth import shib_login  # decorator
 from django.conf import settings as project_settings
 from django.contrib.auth import logout
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseNotFound, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
+
+# from book_locator_app.lib.shib_auth import shib_login  # decorator
 
 
 log = logging.getLogger(__name__)
@@ -88,6 +91,10 @@ def print_labels( request ):
             'level': 'A',
             'date': '11/19' },
         ] }
+
+    initial_dct = label_helper.arrange_metadata_by_floor( 'rock' )
+
+
     if request.GET.get('format', '') == 'json':
         resp = HttpResponse( json.dumps(data, sort_keys=True, indent=2), content_type='application/json; charset=utf-8' )
     else:
