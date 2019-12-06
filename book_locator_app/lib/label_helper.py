@@ -68,6 +68,8 @@ def prep_floor_ranges( sorted_floor_list, initial_dct ):
             if 'location_code' not in range_info_dct.keys() and 'location-code' in range_info_dct.keys():
                 range_info_dct['location_code'] = range_info_dct['location-code']
                 del range_info_dct['location-code']
+            elif 'location_code' not in range_info_dct.keys():
+                range_info_dct['location_code'] = 'not_listed'
 
             floor_dct[floor].append( range_info_dct )
             # if len( floor_dct[floor] ) < 20:
