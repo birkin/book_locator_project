@@ -3,57 +3,96 @@
 <!doctype html>
 <html>
 <head>
-<title>LABELS</title>
 
-<!--CSS-->
-<link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css"/>
-<link href="{% static 'css/print.css' %}" rel="stylesheet" type="text/css" media="print" />
+    <title>LABELS</title>
 
+    <style type="text/css">
+        /*
+        This does not work :(
+        Select landscape by default (https://stackoverflow.com/a/1392794/446681)
+        @media print{@page {size: landscape}}
+        */
+        @media print{
+            @page {size: landscape}
+        }
+        table {
+            width: 100%;
+        }
+        .column {
+            column-width: 100px;
+            padding-right: 20px;
+            font-size: 14px;
+            vertical-align: top;
+        }
+
+        .callnumber {
+            white-space: nowrap;
+        }
+        .pagebreak {
+            page-break-after: always;
+        }
+    </style>
 
 </head>
 
 <body>
 
 {% for floor_key, aisle_dct_value in label_data.items %}
-    <!-- <p>key, `{{ key }}</p> -->
-    <!-- <p>value, `{{ value }}`</p> -->
 
     {% for padded_aisle_key, range_dct_value in aisle_dct_value.items %}
-    <!-- <p>key, `{{ key }}</p> -->
-    <!-- <p>value, `{{ value }}`</p> -->
+    <table>
+        <tbody>
 
-    <p>{{ range_dct_value.aisle }}</p>
-    <p>{{ range_dct_value.begin }}</p>
-    <p>{{ range_dct_value.location_code|capfirst }}</p>
-    <p>{{ range_dct_value.floor|upper }}</p>
+            <tr>
+                <td class="column">
+                    <p>Upper-Column-1</p>
+                    {{ range_dct_value.aisle }}<br/>
+                    {{ range_dct_value.begin }}<br/>
+                    {{ range_dct_value.end }}<br/>
+                    {{ range_dct_value.location_code|capfirst }}<br/>
+                    {{ range_dct_value.floor|upper }}<br/>
+                    {{ range_dct_value.date_str }}
+                </td>
+                <td class="column">
+                    <p>Upper-Column-2</p>
+                    {{ range_dct_value.aisle }}<br/>
+                    {{ range_dct_value.begin }}<br/>
+                    {{ range_dct_value.end }}<br/>
+                    {{ range_dct_value.location_code|capfirst }}<br/>
+                    {{ range_dct_value.floor|upper }}<br/>
+                    {{ range_dct_value.date_str }}
+                </td>
+            </tr>
+            <hr/>
+            <tr>
+                <td class="column">
+                    <p>Lower-Column-1</p>
+                    {{ range_dct_value.aisle }}<br/>
+                    {{ range_dct_value.begin }}<br/>
+                    {{ range_dct_value.end }}<br/>
+                    {{ range_dct_value.location_code|capfirst }}<br/>
+                    {{ range_dct_value.floor|upper }}<br/>
+                    {{ range_dct_value.date_str }}
+                </td>
+                <td class="column">
+                    <p>Lower-Column-2</p>
+                    {{ range_dct_value.aisle }}<br/>
+                    {{ range_dct_value.begin }}<br/>
+                    {{ range_dct_value.end }}<br/>
+                    {{ range_dct_value.location_code|capfirst }}<br/>
+                    {{ range_dct_value.floor|upper }}<br/>
+                    {{ range_dct_value.date_str }}
+                </td>
 
-        {% for key, value in range_dct_value.items %}
-        <p>key, `{{ key }}`</p>
-        <p>value, `{{ value }}`</p>
-        {% endfor %}
+            </tr>
+            <hr/>
+        </tbody>
+    </table>
 
-        <hr/>
-
+    <div class="pagebreak"> </div>
     {% endfor %}
 
 {% endfor %}
-
-<hr/>
-<hr/>
-<hr/>
-{% for entry in range_list %}
-
-<p>{{ entry.range_start }}</p>
-<p>{{ entry.callnumber_start }}</p>
-<p>{{ entry.callnumber_end }}</p>
-<p>{{ entry.building }}</p>
-<p>{{ entry.level }}</p>
-<p>{{ entry.date }}</p>
-
-<hr/>
-
-{% endfor %}
-
 
 </body>
 
