@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import json, logging, pprint
+import datetime, json, logging, pprint
 from operator import itemgetter
 from urllib.parse import unquote
 
@@ -67,6 +67,7 @@ def prep_floor_ranges( sorted_floor_list, initial_dct ):
 
             ## data cleanup
             stripped_aisle = range_info_dct['aisle'].strip()
+            range_info_dct['date_str'] = '%s/%s' % ( datetime.datetime.today().month, datetime.datetime.today().year )
             if stripped_aisle != range_info_dct['aisle']:
                 log.debug( 'updating aisle with stripped version' )
                 range_info_dct['aisle'] = stripped_aisle
@@ -75,7 +76,6 @@ def prep_floor_ranges( sorted_floor_list, initial_dct ):
                 del range_info_dct['location-code']
             elif 'location_code' not in range_info_dct.keys():
                 range_info_dct['location_code'] = 'not_listed'
-                range_info_dct['date_str'] = '%s/%s' % ( datetime.datetime.today().month, datetime.datetime.today().year )
 
             # floor_dct[floor].append( range_info_dct )
             if len( floor_dct[floor] ) < 20:
@@ -125,7 +125,8 @@ def extract_duplicates( floor_dct, duplicates ):
                             'location_code': range_dct['location_code'],
                             'normalized_start': '',
                             'note': 'MULTIPLE-ENTRIES for this range; PROCESS-MANUALLY for now with emailed data.',
-                            'padded_aisle': range_dct['padded_aisle']
+                            'padded_aisle': range_dct['padded_aisle'],
+                            'date_str': '%s/%s' % ( datetime.datetime.today().month, datetime.datetime.today().year )
                             }
                     except:
                         log.exception( 'problem creating temp_holder_dct; traceback follows' )
