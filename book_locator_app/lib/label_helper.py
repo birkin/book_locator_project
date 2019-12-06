@@ -69,9 +69,9 @@ def prep_floor_ranges( sorted_floor_list, initial_dct ):
                 range_info_dct['location_code'] = range_info_dct['location-code']
                 del range_info_dct['location-code']
 
-            # floor_dct[floor].append( range_info_dct )
-            if len( floor_dct[floor] ) < 20:
-                floor_dct[floor].append( range_info_dct )
+            floor_dct[floor].append( range_info_dct )
+            # if len( floor_dct[floor] ) < 20:
+            #     floor_dct[floor].append( range_info_dct )
     log.debug( f'floor_dct, ```{pprint.pformat(floor_dct)}```' )
     return floor_dct
 
