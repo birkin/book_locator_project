@@ -130,10 +130,10 @@ def extract_duplicates( floor_dct, duplicates ):
                         log.exception( 'problem creating temp_holder_dct; traceback follows' )
                         log.debug( f'problemmatic range_dct, ```{pprint.pformat(range_dct)}```')
                         raise Exception( 'see logs' )
-                    aisle_dct[range_dct['aisle']] = temp_holder_dct  # so this will happen twice, when the second item is found, but that's ok; the second temp-holder will just overwrite the first.
+                    aisle_dct[range_dct['padded_aisle']] = temp_holder_dct  # so this will happen twice, when the second item is found, but that's ok; the second temp-holder will just overwrite the first.
                 else:
                     ## if this is NOT one of the duplicates, save the range-info to the aisle_dct
-                    aisle_dct[range_dct['aisle']] = range_dct  # I could pop out the unnecessary 'aisle' element
+                    aisle_dct[range_dct['padded_aisle']] = range_dct  # I could pop out the unnecessary 'aisle' element
         updated_floor_dct[floor_key] = aisle_dct
     log.debug( f'updated_floor_dct, ```{pprint.pformat(updated_floor_dct)}```' )
     log.debug( f'enhanced duplicates, ```{pprint.pformat(duplicates)}```' )

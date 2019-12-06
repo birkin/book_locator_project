@@ -14,6 +14,33 @@
 
 <body>
 
+{% for floor_key, aisle_dct_value in label_data.items %}
+    <!-- <p>key, `{{ key }}</p> -->
+    <!-- <p>value, `{{ value }}`</p> -->
+
+    {% for padded_aisle_key, range_dct_value in aisle_dct_value.items %}
+    <!-- <p>key, `{{ key }}</p> -->
+    <!-- <p>value, `{{ value }}`</p> -->
+
+    <p>{{ range_dct_value.aisle }}</p>
+    <p>{{ range_dct_value.begin }}</p>
+    <p>{{ range_dct_value.location_code|capfirst }}</p>
+    <p>{{ range_dct_value.floor|upper }}</p>
+
+        {% for key, value in range_dct_value.items %}
+        <p>key, `{{ key }}`</p>
+        <p>value, `{{ value }}`</p>
+        {% endfor %}
+
+        <hr/>
+
+    {% endfor %}
+
+{% endfor %}
+
+<hr/>
+<hr/>
+<hr/>
 {% for entry in range_list %}
 
 <p>{{ entry.range_start }}</p>
@@ -26,6 +53,7 @@
 <hr/>
 
 {% endfor %}
+
 
 </body>
 
