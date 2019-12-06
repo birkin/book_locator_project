@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import json, logging, pprint
-
-# from django.conf import settings as project_settings
-from book_locator_app import settings_app
+from operator import itemgetter
 from urllib.parse import unquote
+
+from book_locator_app import settings_app
 
 
 log = logging.getLogger(__name__)
@@ -34,6 +34,7 @@ def load_json( data_code ):
 
 def prep_floor_list( initial_dct ):
     """ Preps floor list.
+        Example output: ['2', '3', '4', 'a', 'b']
         Called by arrange_metadata_by_floor() """
     floor_list = []
     for ( normalized_cn_key, range_info_dct) in initial_dct.items():
@@ -54,9 +55,26 @@ def prep_floor_ranges( sorted_floor_list, initial_dct ):
     for ( normalized_cn_key, range_info_dct) in initial_dct.items():
         if range_info_dct['floor']:
             floor = str( range_info_dct['floor'] )
-            range_info_dct['normalized_callnumber'] = normalized_cn_key
+            # range_info_dct['normalized_callnumber'] = normalized_cn_key
+            range_info_dct['padded_aisle'] = range_info_dct['aisle'].zfill( 5 )  # for possible sorting later
             floor_dct[floor].append( range_info_dct )
-    log.debug( f'floor_dct, ```{pprint.pformat(floor_dct)}```' )
+        # if len( floor_dct[floor] ) > 100:
+        #     break
+    log.debug( f'initial floor_dct, ```{pprint.pformat(floor_dct)}```' )
+    # for ( floor_key, range_dct_lst ) in floor_dct.items():
+    #     # sorted_range_dct_lst = sorted( range_dct_lst, key=itemgetter('normalized_start') )
+    #     sorted_range_dct_lst = sorted( range_dct_lst, key=itemgetter('padded_aisle', 'normalized_start') )
+    #     floor_dct[floor_key] = sorted_range_dct_lst
+
+    for ( floor_key, range_dct_lst ) in floor_dct.items():
+        duplicate_aisle_check = []
+        for range_dct in range_dct_lst:
+            if range_dct['aisle'] not in duplicate_aisle_check:
+                duplicate_aisle_check.append( range_dct['aisle'] )
+            else:
+                range_dct['duplicate_aisle'] = True
+
+    log.debug( f'final floor_dct, ```{pprint.pformat(floor_dct)}```' )
     return floor_dct
 
 
