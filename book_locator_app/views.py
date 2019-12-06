@@ -64,8 +64,7 @@ def map( request ):
 
 def print_labels( request ):
     """ Manages labels for signage. """
-    data = {
-        'range_list': [
+    range_list = [
         {   'range_start': '65A',
             'callnumber_start': '2-SIZE N1 A25 v.8',
             'callnumber_end': '2-SIZE N9 J2 7',
@@ -90,19 +89,21 @@ def print_labels( request ):
             'building': 'Rock',
             'level': 'A',
             'date': '11/19' },
-        ] }
+        ]
 
-    initial_dct = label_helper.arrange_metadata_by_floor( 'rock' )
+    label_dct = label_helper.arrange_metadata_by_floor( 'rock' )
 
+    context = {
+        'range_list': range_list,
+        'label_data': label_dct
+        }
 
     if request.GET.get('format', '') == 'json':
-        resp = HttpResponse( json.dumps(data, sort_keys=True, indent=2), content_type='application/json; charset=utf-8' )
+        resp = HttpResponse( json.dumps(context, sort_keys=True, indent=2), content_type='application/json; charset=utf-8' )
     else:
-        resp = render( request, 'book_locator_app_templates/print_labels.html', data )
+        resp = render( request, 'book_locator_app_templates/print_labels.html', context )
     log.debug( 'returning resp' )
     return resp
-
-    return HttpResponse( 'labels under construction' )
 
 
 def info( request  ):

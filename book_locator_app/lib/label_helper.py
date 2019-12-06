@@ -14,6 +14,7 @@ FILE_MAPPER = {
     'rock': 'rock_meta.json',
     'sci': 'sci_meta.json' }
 
+
 def arrange_metadata_by_floor( data_code ):
     """ Reorganizes metadata for printing.
         Called by views.print_labels() """
@@ -23,6 +24,8 @@ def arrange_metadata_by_floor( data_code ):
     floor_dct = prep_floor_ranges( sorted_floor_list, initial_dct )
     duplicates = find_duplicates( floor_dct )
     ( updated_floor_dct, updated_duplicates ) = extract_duplicates( floor_dct, duplicates )
+    return updated_floor_dct
+
 
 def load_json( data_code ):
     """ Loads appropriate json file.
@@ -33,6 +36,7 @@ def load_json( data_code ):
         initial_dct = json.loads( f.read() )
     log.debug( f'initial_dct.keys(), ```{initial_dct.keys()}```' )
     return initial_dct
+
 
 def prep_floor_list( initial_dct ):
     """ Preps floor list.
@@ -47,6 +51,7 @@ def prep_floor_list( initial_dct ):
     sorted_floor_list = sorted( floor_list )
     log.debug( f'sorted_floor_list, ```{sorted_floor_list}```' )
     return sorted_floor_list
+
 
 def prep_floor_ranges( sorted_floor_list, initial_dct ):
     """ Attaches range-dct to floor-key for each floor.
@@ -71,15 +76,12 @@ def prep_floor_ranges( sorted_floor_list, initial_dct ):
             elif 'location_code' not in range_info_dct.keys():
                 range_info_dct['location_code'] = 'not_listed'
 
-            floor_dct[floor].append( range_info_dct )
-            # if len( floor_dct[floor] ) < 20:
-            #     floor_dct[floor].append( range_info_dct )
+            # floor_dct[floor].append( range_info_dct )
+            if len( floor_dct[floor] ) < 20:
+                floor_dct[floor].append( range_info_dct )
     log.debug( f'floor_dct, ```{pprint.pformat(floor_dct)}```' )
     return floor_dct
 
-
-    log.debug( f'final floor_dct, ```{pprint.pformat(floor_dct)}```' )
-    return floor_dct
 
 def find_duplicates( floor_dct ):
     """ Finds the "multiple-aisle" entries and returns them.
