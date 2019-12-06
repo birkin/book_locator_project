@@ -69,9 +69,9 @@ def prep_floor_ranges( sorted_floor_list, initial_dct ):
                 range_info_dct['location_code'] = range_info_dct['location-code']
                 del range_info_dct['location-code']
 
-            floor_dct[floor].append( range_info_dct )
-            # if len( floor_dct[floor] ) < 20:
-            #     floor_dct[floor].append( range_info_dct )
+            # floor_dct[floor].append( range_info_dct )
+            if len( floor_dct[floor] ) < 20:
+                floor_dct[floor].append( range_info_dct )
     log.debug( f'floor_dct, ```{pprint.pformat(floor_dct)}```' )
     return floor_dct
 
@@ -102,6 +102,7 @@ def extract_duplicates( floor_dct, duplicates ):
         Called by arrange_metadata_by_floor() """
     updated_floor_dct = {}
     for ( floor_key, range_dct_lst ) in floor_dct.items():
+        log.debug( f'floor_key, `{floor_key}`' )
         aisle_dct = {}
         for range_dct in range_dct_lst:
             for dup_dct in duplicates:
@@ -113,12 +114,12 @@ def extract_duplicates( floor_dct, duplicates ):
                     try:
                         temp_holder_dct = {
                             'aisle': range_dct['aisle'],
-                            'begin': '',
+                            'begin': 'HANDLE-MANUALLY',
                             'end': '',
                             'floor': range_dct['floor'],
                             'location_code': range_dct['location_code'],
                             'normalized_start': '',
-                            'note': '',
+                            'note': 'MULTIPLE-ENTRIES for this range; PROCESS-MANUALLY for now with emailed data.',
                             'padded_aisle': range_dct['padded_aisle']
                             }
                     except:
@@ -130,9 +131,9 @@ def extract_duplicates( floor_dct, duplicates ):
                     ## if this is NOT one of the duplicates, save the range-info to the aisle_dct
                     aisle_dct[range_dct['aisle']] = range_dct  # I could pop out the unnecessary 'aisle' element
         updated_floor_dct[floor_key] = aisle_dct
-        log.debug( f'updated_floor_dct, ```{pprint.pformat(updated_floor_dct)}```' )
-        log.debug( f'enhanced duplicates, ```{pprint.pformat(duplicates)}```' )
-        return ( updated_floor_dct, duplicates )
+    log.debug( f'updated_floor_dct, ```{pprint.pformat(updated_floor_dct)}```' )
+    log.debug( f'enhanced duplicates, ```{pprint.pformat(duplicates)}```' )
+    return ( updated_floor_dct, duplicates )
 
 
 ## Old code, when I thought it'd be useful to sort by aisle. No longer necessary; need to trust order of spreadsheet.
