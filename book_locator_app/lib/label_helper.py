@@ -24,7 +24,8 @@ def arrange_metadata_by_floor( data_code ):
     floor_dct = prep_floor_ranges( sorted_floor_list, initial_dct )
     duplicates = find_duplicates( floor_dct )
     ( updated_floor_dct, updated_duplicates ) = extract_duplicates( floor_dct, duplicates )
-    return updated_floor_dct
+    simple_list = prep_list_from_dct( updated_floor_dct )
+    return simple_list
 
 
 def load_json( data_code ):
@@ -140,6 +141,17 @@ def extract_duplicates( floor_dct, duplicates ):
     log.debug( f'updated_floor_dct, ```{pprint.pformat(updated_floor_dct)}```' )
     log.debug( f'enhanced duplicates, ```{pprint.pformat(duplicates)}```' )
     return ( updated_floor_dct, duplicates )
+
+
+def prep_list_from_dct( floor_dct ):
+    """ Takes the floor-based dct, with the aisle-dct value -- and convert into a simple list.
+        Called by arrange_metadata_by_floor() """
+    label_lst = []
+    for ( irrelevant_floor_key, aisle_dct_value ) in floor_dct.items():
+        for ( irrelevant_aisle_key, range_dct_value ) in aisle_dct_value.items():
+            label_lst.append( range_dct_value )
+    log.debug( f'label_lst, ```{pprint.pformat(label_lst)[0:1000]}```' )
+    return label_lst
 
 
 ## Old code, when I thought it'd be useful to sort by aisle. No longer necessary; need to trust order of spreadsheet.

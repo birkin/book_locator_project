@@ -43,27 +43,28 @@
 
 <body>
 
-    {% for entry in label_data %}
+{% for floor_key, aisle_dct_value in label_data.items %}
 
+    {% for padded_aisle_key, range_dct_value in aisle_dct_value.items %}
     <table>
         <tbody>
 
             <tr>
                 <td class="column-left">
-                    {{ entry.aisle }}<br/>
-                    {{ entry.begin }}<br/>
-                    {{ entry.end }}<br/>
-                    {{ entry.location_code|capfirst }}<br/>
-                    {{ entry.floor|upper }}<br/>
-                    {{ entry.date_str }}
+                    {{ range_dct_value.aisle }}<br/>
+                    {{ range_dct_value.begin }}<br/>
+                    {{ range_dct_value.end }}<br/>
+                    {{ range_dct_value.location_code|capfirst }}<br/>
+                    {{ range_dct_value.floor|upper }}<br/>
+                    {{ range_dct_value.date_str }}
                 </td>
                 <td class="column-right">
-                    {{ entry.aisle }}<br/>
-                    {{ entry.begin }}<br/>
-                    {{ entry.end }}<br/>
-                    {{ entry.location_code|capfirst }}<br/>
-                    {{ entry.floor|upper }}<br/>
-                    {{ entry.date_str }}
+                    {{ range_dct_value.aisle }}<br/>
+                    {{ range_dct_value.begin }}<br/>
+                    {{ range_dct_value.end }}<br/>
+                    {{ range_dct_value.location_code|capfirst }}<br/>
+                    {{ range_dct_value.floor|upper }}<br/>
+                    {{ range_dct_value.date_str }}
                 </td>
             </tr>
             <hr/>
@@ -76,6 +77,9 @@
         {% endif %}
 
     {% endfor %}
+
+
+{% endfor %}
 
 </body>
 
