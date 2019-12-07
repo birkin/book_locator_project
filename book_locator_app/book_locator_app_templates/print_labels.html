@@ -16,11 +16,17 @@
             @page {size: landscape}
         }
         table {
-            width: 100%;
+            width: 300px;
         }
-        .column {
+        .column-left {
             column-width: 100px;
-            padding-right: 20px;
+            padding-left: 50px;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        .column-right {
+            column-width: 100px;
+            padding-left: 50px;
             font-size: 14px;
             vertical-align: top;
         }
@@ -44,8 +50,7 @@
         <tbody>
 
             <tr>
-                <td class="column">
-                    <p>Upper-Column-1</p>
+                <td class="column-left">
                     {{ range_dct_value.aisle }}<br/>
                     {{ range_dct_value.begin }}<br/>
                     {{ range_dct_value.end }}<br/>
@@ -53,8 +58,7 @@
                     {{ range_dct_value.floor|upper }}<br/>
                     {{ range_dct_value.date_str }}
                 </td>
-                <td class="column">
-                    <p>Upper-Column-2</p>
+                <td class="column-right">
                     {{ range_dct_value.aisle }}<br/>
                     {{ range_dct_value.begin }}<br/>
                     {{ range_dct_value.end }}<br/>
@@ -64,33 +68,16 @@
                 </td>
             </tr>
             <hr/>
-            <tr>
-                <td class="column">
-                    <p>Lower-Column-1</p>
-                    {{ range_dct_value.aisle }}<br/>
-                    {{ range_dct_value.begin }}<br/>
-                    {{ range_dct_value.end }}<br/>
-                    {{ range_dct_value.location_code|capfirst }}<br/>
-                    {{ range_dct_value.floor|upper }}<br/>
-                    {{ range_dct_value.date_str }}
-                </td>
-                <td class="column">
-                    <p>Lower-Column-2</p>
-                    {{ range_dct_value.aisle }}<br/>
-                    {{ range_dct_value.begin }}<br/>
-                    {{ range_dct_value.end }}<br/>
-                    {{ range_dct_value.location_code|capfirst }}<br/>
-                    {{ range_dct_value.floor|upper }}<br/>
-                    {{ range_dct_value.date_str }}
-                </td>
 
-            </tr>
-            <hr/>
         </tbody>
     </table>
 
-    <div class="pagebreak"> </div>
+        {% if forloop.counter|divisibleby:2 %}
+        <div class="pagebreak"> </div>
+        {% endif %}
+
     {% endfor %}
+
 
 {% endfor %}
 
