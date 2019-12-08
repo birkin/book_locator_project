@@ -41,14 +41,23 @@
             /*vertical-align: top;*/
         }
 
-        .aisle {
-            white-space: nowrap;
+        div.aisle {
+            /*white-space: nowrap;*/
         }
-        .begin {
-            white-space: nowrap;
+        div.begin {
+            /*white-space: nowrap;*/
+            text-align: center;
+            font-size: 36px;
+            font-weight: bolder;
         }
-        .end {
-            white-space: nowrap;
+        div.to {
+            text-align: center;
+            font-size: 24px;
+        }
+        div.end {
+            text-align: center;
+            font-size: 36px;
+            font-weight: bolder;
         }
         .location {
             white-space: nowrap;
@@ -76,20 +85,22 @@
 
             <tr>
                 <td class="column-left">
-                    <span class="aisle">{{ entry.aisle }}</span><br/>
-                    <span class="begin">{{ entry.begin }}</span><br/>
-                    <span class="end">{{ entry.end }}</span><br/>
-                    <span class="location">{{ entry.location_code|capfirst }}</span><br/>
-                    <span class="floor">{{ entry.floor|upper }}</span><br/>
-                    <span class="date">{{ entry.date_str }}</span>
+                    <div class="aisle">{{ entry.aisle }}</div><br/>
+                    <div class="begin">{{ entry.begin }}</div><br/>
+                    <div class="to">to</div>
+                    <div class="end">{{ entry.end }}</div><br/>
+                    <div class="location">{{ entry.location_code|capfirst }}</div><br/>
+                    <div class="floor">{{ entry.floor|upper }}</div><br/>
+                    <div class="date">{{ entry.date_str }}</div>
                 </td>
                 <td class="column-right">
-                    {{ entry.aisle }}<br/>
-                    {{ entry.begin }}<br/>
-                    {{ entry.end }}<br/>
-                    {{ entry.location_code|capfirst }}<br/>
-                    {{ entry.floor|upper }}<br/>
-                    {{ entry.date_str }}
+                    <div class="aisle">{{ entry.aisle }}</div><br/>
+                    <div class="begin">{{ entry.begin }}</div><br/>
+                    <div class="to">to</div>
+                    <div class="end">{{ entry.end }}</div><br/>
+                    <div class="location">{{ entry.location_code|capfirst }}</div><br/>
+                    <div class="floor">{{ entry.floor|upper }}</div><br/>
+                    <div class="date">{{ entry.date_str }}</div>
                 </td>
             </tr>
             <hr/>
