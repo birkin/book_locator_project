@@ -16,24 +16,50 @@
             @page {size: landscape}
         }
         table {
-            width: 300px;
+            width: 900px;
+            border-collapse: collapse;
         }
-        .column-left {
-            column-width: 100px;
-            padding-left: 50px;
-            font-size: 14px;
-            vertical-align: top;
-        }
-        .column-right {
-            column-width: 100px;
-            padding-left: 50px;
-            font-size: 14px;
-            vertical-align: top;
+        td {
+            border: 1px solid blue;
+            column-width: 450px;
+            padding: 20px;
+            /*border: 1px solid #ddd;*/
         }
 
-        .callnumber {
+        td.column-left {
+            /*column-width: 300px;*/
+            /*padding-left: 10px;*/
+            /*font-size: 14px;*/
+            /*vertical-align: top;*/
+        }
+
+
+        td.column-right {
+            /*column-width: 300px;*/
+            /*padding-left: 10px;*/
+            /*font-size: 14px;*/
+            /*vertical-align: top;*/
+        }
+
+        .aisle {
             white-space: nowrap;
         }
+        .begin {
+            white-space: nowrap;
+        }
+        .end {
+            white-space: nowrap;
+        }
+        .location {
+            white-space: nowrap;
+        }
+        .floor {
+            white-space: nowrap;
+        }
+        .date {
+            white-space: nowrap;
+        }
+
         .pagebreak {
             page-break-after: always;
         }
@@ -50,12 +76,12 @@
 
             <tr>
                 <td class="column-left">
-                    {{ entry.aisle }}<br/>
-                    {{ entry.begin }}<br/>
-                    {{ entry.end }}<br/>
-                    {{ entry.location_code|capfirst }}<br/>
-                    {{ entry.floor|upper }}<br/>
-                    {{ entry.date_str }}
+                    <span class="aisle">{{ entry.aisle }}</span><br/>
+                    <span class="begin">{{ entry.begin }}</span><br/>
+                    <span class="end">{{ entry.end }}</span><br/>
+                    <span class="location">{{ entry.location_code|capfirst }}</span><br/>
+                    <span class="floor">{{ entry.floor|upper }}</span><br/>
+                    <span class="date">{{ entry.date_str }}</span>
                 </td>
                 <td class="column-right">
                     {{ entry.aisle }}<br/>
