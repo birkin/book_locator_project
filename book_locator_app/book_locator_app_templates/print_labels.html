@@ -32,31 +32,36 @@
 
         /* elements-start */
         div.aisle {
-            margin-top: -40px;
+            margin-top: 0px;
         }
         div.begin {
             text-align: center;
             font-size: 36px;
             font-weight: bolder;
-            margin-top: 20px;
+            margin-top: 15px;
         }
         div.to {
             text-align: center;
             font-size: 24px;
-            margin-top: 20px;
+            margin-top: 17px;
         }
         div.end {
             text-align: center;
             font-size: 36px;
             font-weight: bolder;
-            margin-top: 25px;
+            margin-top: 20px;
         }
-        div.location {
-            margin-top: 25px;
+        div.bottom-line {
+            margin-top: 20px;
+        }
+        span.location {
+            margin: 0;
         }
         span.floor {
+            margin-left: 40px;
         }
-        div.date {
+        span.date {
+            float: right;
         }
         /* elements-end */
 
@@ -80,17 +85,23 @@
                     <div class="begin">{{ entry.begin }}</div>
                     <div class="to">to</div>
                     <div class="end">{{ entry.end }}</div><br/>
-                    <div class="location">{{ entry.location_code|capfirst }} <span class="floor">{{ entry.floor|upper }}</span></div>
-                    <div class="date">{{ entry.date_str }}</div>
+                    <div class="bottom-line">
+                        <div class="location">{{ entry.location_code|capfirst }}
+                            <span class="floor">{{ entry.floor|upper }}</span>
+                            <span class="date">{{ entry.date_str }}</span>
+                        </div>
+                    </div>
                 </td>
                 <td class="column-right">
-                    <div class="aisle">{{ entry.aisle }}</div><br/>
-                    <div class="begin">{{ entry.begin }}</div><br/>
+                    <div class="aisle">{{ entry.aisle }}</div>
+                    <div class="begin">{{ entry.begin }}</div>
                     <div class="to">to</div>
                     <div class="end">{{ entry.end }}</div><br/>
-                    <div class="location">{{ entry.location_code|capfirst }}</div><br/>
-                    <div class="floor">{{ entry.floor|upper }}</div><br/>
-                    <div class="date">{{ entry.date_str }}</div>
+                    <div class="bottom-line">
+                        <span class="location">{{ entry.location_code|capfirst }}</span>
+                        <span class="floor">{{ entry.floor|upper }}</span>
+                        <span class="date">{{ entry.date_str }}</span>
+                    </div>
                 </td>
             </tr>
             <hr/>
