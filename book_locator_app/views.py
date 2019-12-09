@@ -62,46 +62,33 @@ def map( request ):
     return resp
 
 
-def print_labels( request ):
-    """ Manages labels for signage. """
-    range_list = [
-        {   'range_start': '65A',
-            'callnumber_start': '2-SIZE N1 A25 v.8',
-            'callnumber_end': '2-SIZE N9 J2 7',
-            'building': 'Rock',
-            'level': 'A',
-            'date': '11/19' },
-        {   'range_start': '65B',
-            'callnumber_start': '2-SIZE N9 J2 8',
-            'callnumber_end': '2-SIZE NA1288 S94 1998',
-            'building': 'Rock',
-            'level': 'A',
-            'date': '11/19' },
-        {   'range_start': '66A',
-            'callnumber_start': 'N123456 A25 v.8',
-            'callnumber_end': 'N901234 J2 7',
-            'building': 'Rock',
-            'level': 'A',
-            'date': '11/19' },
-        {   'range_start': '66B',
-            'callnumber_start': 'P123456 A25 v.8',
-            'callnumber_end': 'P901234 J2 7',
-            'building': 'Rock',
-            'level': 'A',
-            'date': '11/19' },
-        ]
-
-    label_dct = label_helper.arrange_metadata_by_floor( 'rock' )
-
+def labels_home( request ):
+    """ Displays possible links. """
     context = {
-        'range_list': range_list,
-        'label_data': label_dct
-        }
-
+        'rock_url': '%srock/' % ( reverse('labels_home_url') )
+    }
     if request.GET.get('format', '') == 'json':
         resp = HttpResponse( json.dumps(context, sort_keys=True, indent=2), content_type='application/json; charset=utf-8' )
     else:
-        resp = render( request, 'book_locator_app_templates/print_labels.html', context )
+        resp = render( request, 'book_locator_app_templates/labels_home.html', context )
+    log.debug( 'returning resp' )
+    return resp
+
+
+def labels_print( request, location_code ):
+    """ Manages labels for signage. """
+    legit_locations = ['rock']
+    if location_code not in legit_locations:
+        return HttpResponseNotFound( '404 / Not Found' )
+    label_dct = label_helper.arrange_metadata_by_floor( location_code )
+    context = {
+        'location_code': location_code,
+        'label_data': label_dct
+        }
+    if request.GET.get('format', '') == 'json':
+        resp = HttpResponse( json.dumps(context, sort_keys=True, indent=2), content_type='application/json; charset=utf-8' )
+    else:
+        resp = render( request, 'book_locator_app_templates/labels_print.html', context )
     log.debug( 'returning resp' )
     return resp
 

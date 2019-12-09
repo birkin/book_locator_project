@@ -17,7 +17,8 @@ urlpatterns = [
 
     url( r'^map/', views.map, name='map_url' ),
 
-    url( r'^print_labels/', views.print_labels, name='labels_url' ),
+    url( r'^print_labels/(?P<location_code>.*)/$', views.labels_print, name='labels_print_url' ),
+    url( r'^print_labels/', views.labels_home, name='labels_home_url' ),
 
     url( r'^info/', views.info, name='info_url' ),
 
