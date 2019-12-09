@@ -106,15 +106,19 @@ def extract_duplicates( floor_dct, duplicates ):
     """ Replaces the list of range-dcts attached to each floor with a floor-level dict of aisle-keys:range-dct-values.
         Also merges the duplicate-ranges.
         Called by arrange_metadata_by_floor() """
+    log.debug( f'duplicates initially, ```{pprint.pformat(duplicates)}```' )
     updated_floor_dct = {}
     for ( floor_key, range_dct_lst ) in floor_dct.items():
         log.debug( f'floor_key, `{floor_key}`' )
         aisle_dct = {}
         for range_dct in range_dct_lst:
+            dup_found_flag = False
             for dup_dct in duplicates:
                 ## if this is one of the duplicates, update duplicates and save a temp-holder to the aisle_dct
                 if range_dct['floor'] == dup_dct['floor'] and range_dct['aisle'] == dup_dct['aisle']:
+                    log.debug( f'processing floor, `{floor_key}`; duplicate found' )
                     if 'dup_list' not in dup_dct.keys():
+                        log.debug( f'processing floor, `{floor_key}`; adding `dup_list` key to dup_dct' )
                         dup_dct['dup_list'] = []
                     dup_dct['dup_list'].append( range_dct )
                     try:
@@ -129,14 +133,20 @@ def extract_duplicates( floor_dct, duplicates ):
                             'padded_aisle': range_dct['padded_aisle'],
                             'date_str': '%s/%s' % ( datetime.datetime.today().month, datetime.datetime.today().year )
                             }
+                        log.debug( f'processing floor, `{floor_key}`; temp_holder_dct created' )
                     except:
                         log.exception( 'problem creating temp_holder_dct; traceback follows' )
-                        log.debug( f'problemmatic range_dct, ```{pprint.pformat(range_dct)}```')
+                        log.debug( f'problematic range_dct, ```{pprint.pformat(range_dct)}```')
                         raise Exception( 'see logs' )
-                    aisle_dct[range_dct['padded_aisle']] = temp_holder_dct  # so this will happen twice, when the second item is found, but that's ok; the second temp-holder will just overwrite the first.
+                    aisle_dct[range_dct['padded_aisle']] = temp_holder_dct  # this can happen multiple times, when the subsequent item(s) is found, but that's ok; the subsequent temp-holder will just overwrite the first.
+                    dup_found_flag = True
+                    log.debug( f'processing floor, `{floor_key}`; temp_holder_dct added for key, ```{range_dct["padded_aisle"]}```' )
+                    break
                 else:
                     ## if this is NOT one of the duplicates, save the range-info to the aisle_dct
-                    aisle_dct[range_dct['padded_aisle']] = range_dct  # I could pop out the unnecessary 'aisle' element
+                    log.debug( f'processing floor, `{floor_key}`; no duplicate found for aisle, `{range_dct["aisle"]}` and floor, `{range_dct["floor"]}' )
+            if dup_found_flag == False:
+                aisle_dct[range_dct['padded_aisle']] = range_dct  # I could pop out the unnecessary 'aisle' element
         updated_floor_dct[floor_key] = aisle_dct
     log.debug( f'updated_floor_dct, ```{pprint.pformat(updated_floor_dct)}```' )
     log.debug( f'enhanced duplicates, ```{pprint.pformat(duplicates)}```' )
