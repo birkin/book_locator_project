@@ -24,7 +24,8 @@ def arrange_metadata_by_floor( data_code ):
     floor_dct = prep_floor_ranges( sorted_floor_list, initial_dct )
     duplicates = find_duplicates( floor_dct )
     ( updated_floor_dct, updated_duplicates ) = extract_duplicates( floor_dct, duplicates )
-    simple_list = prep_list_from_dct( updated_floor_dct )
+    final_floor_dct = merge_duplicates( updated_floor_dct, updated_duplicates )
+    simple_list = prep_list_from_dct( final_floor_dct )
     return simple_list
 
 
@@ -96,7 +97,7 @@ def find_duplicates( floor_dct ):
                 floor_duplicates_check.append( range_dct['aisle'] )
             else:
                 range_dct['duplicate_aisle'] = True  # not necessary for processing, but useful for visual check
-                duplicate = {'floor': range_dct['floor'], 'aisle': range_dct['aisle']}
+                duplicate = {'floor': range_dct['floor'], 'aisle': range_dct['aisle'], 'padded_aisle': range_dct['padded_aisle']}
                 all_duplicates_check.append( duplicate )
     log.debug( f'duplicates, ```{pprint.pformat(all_duplicates_check)}```' )
     return all_duplicates_check
@@ -107,6 +108,13 @@ def extract_duplicates( floor_dct, duplicates ):
         Also merges the duplicate-ranges.
         Called by arrange_metadata_by_floor() """
     log.debug( f'duplicates initially, ```{pprint.pformat(duplicates)}```' )
+    #
+    unique_duplicates = []  # it was originally useful to see the multiple entries to have a sense of the number of duplicate ranges, but for the following code, i need a unique list.
+    for entry in duplicates:
+        if entry not in unique_duplicates:
+            unique_duplicates.append( entry )
+    duplicates = unique_duplicates
+    #
     updated_floor_dct = {}
     for ( floor_key, range_dct_lst ) in floor_dct.items():
         log.debug( f'floor_key, `{floor_key}`' )
@@ -143,14 +151,44 @@ def extract_duplicates( floor_dct, duplicates ):
                     log.debug( f'processing floor, `{floor_key}`; temp_holder_dct added for key, ```{range_dct["padded_aisle"]}```' )
                     break
                 else:
-                    ## if this is NOT one of the duplicates, save the range-info to the aisle_dct
-                    log.debug( f'processing floor, `{floor_key}`; no duplicate found for aisle, `{range_dct["aisle"]}` and floor, `{range_dct["floor"]}' )
+                    # log.debug( f'processing floor, `{floor_key}`; no duplicate found for aisle, `{range_dct["aisle"]}` and floor, `{range_dct["floor"]}' )
+                    pass
+            ## if this is NOT one of the duplicates, save the range-info to the aisle_dct
             if dup_found_flag == False:
                 aisle_dct[range_dct['padded_aisle']] = range_dct  # I could pop out the unnecessary 'aisle' element
         updated_floor_dct[floor_key] = aisle_dct
     log.debug( f'updated_floor_dct, ```{pprint.pformat(updated_floor_dct)}```' )
     log.debug( f'enhanced duplicates, ```{pprint.pformat(duplicates)}```' )
     return ( updated_floor_dct, duplicates )
+
+
+def merge_duplicates( floor_dct, duplicates ):
+    """ Replaces the initial floor-dct aisle-key/range-dct-value entries which have stubbed entries -- with proper merged data.
+        Called by arrange_metadata_by_floor() """
+    # return floor_dct
+
+    # log.debug( f'duplicates in merge def, ```{pprint.pformat(duplicates)}```' )
+    for entry in duplicates:
+        log.debug( f'entry in merge def, ```{pprint.pformat(entry)}```' )
+
+        ## merge
+        begin = ''
+        end = ''
+        for dup in entry['dup_list']:
+            if begin == '':
+                begin = dup['begin']
+            end = dup['end']
+        ## find item to update
+        floor = str( entry['floor'] )  # the dct-key is a string
+        padded_aisle = entry['padded_aisle']
+        log.debug( 'initial begin, ```{floor_dct[floor][padded_aisle]["begin"]}```' )
+        log.debug( 'initial end, ```{floor_dct[floor][padded_aisle]["end"]}```' )
+        floor_dct[floor][padded_aisle]['begin'] = begin
+        floor_dct[floor][padded_aisle]['end'] = end
+        log.debug( 'final begin, ```{floor_dct[floor][padded_aisle]["begin"]}```' )
+        log.debug( 'final end, ```{floor_dct[floor][padded_aisle]["end"]}```' )
+    log.debug( 'floor_dct has been updated' )
+    return floor_dct
 
 
 def prep_list_from_dct( floor_dct ):
