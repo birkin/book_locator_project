@@ -10,9 +10,17 @@ from book_locator_app import settings_app
 log = logging.getLogger(__name__)
 
 
+# FILE_MAPPER = {
+#     'rock': 'rock_meta.json',
+#     'sci': 'sci_meta.json' }
+
 FILE_MAPPER = {
     'rock': 'rock_meta.json',
-    'sci': 'sci_meta.json' }
+    'sci': 'sci_meta.json',
+    'chinese': 'rock-chinese_meta.json',
+    'japanese': 'rock-japanese_meta.json',
+    'korean': 'rock-korean_meta.json',
+    }
 
 
 def arrange_metadata_by_floor( data_code ):

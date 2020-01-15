@@ -79,7 +79,7 @@ def labels_home( request ):
 def labels_print( request, location_code ):
     """ Manages labels for signage. """
     log.debug( f'location_code, `{location_code}`' )
-    legit_locations = ['rock', 'sci']
+    legit_locations = ['rock', 'sci', 'chinese', 'japanese', 'korean']
     if location_code not in legit_locations:
         return HttpResponseNotFound( '404 / Not Found' )
     label_dct = label_helper.arrange_metadata_by_floor( location_code )
