@@ -66,7 +66,10 @@ def labels_home( request ):
     """ Displays possible links. """
     context = {
         'rock_url': '%srock/' % ( reverse('labels_home_url') ),
-        'sci_url': '%ssci/' % ( reverse('labels_home_url') )
+        'sci_url': '%ssci/' % ( reverse('labels_home_url') ),
+        'chinese_url': f"{reverse('labels_home_url')}chinese/",
+        'japanese_url': f"{reverse('labels_home_url')}japanese/",
+        'korean_url': f"{reverse('labels_home_url')}korean/",
     }
     if request.GET.get('format', '') == 'json':
         resp = HttpResponse( json.dumps(context, sort_keys=True, indent=2), content_type='application/json; charset=utf-8' )
