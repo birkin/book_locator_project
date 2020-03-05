@@ -170,6 +170,35 @@ def extract_duplicates( floor_dct, duplicates ):
     return ( updated_floor_dct, duplicates )
 
 
+# def merge_duplicates( floor_dct, duplicates ):
+#     """ Replaces the initial floor-dct aisle-key/range-dct-value entries which have stubbed entries -- with proper merged data.
+#         Called by arrange_metadata_by_floor() """
+#     # return floor_dct
+
+#     # log.debug( f'duplicates in merge def, ```{pprint.pformat(duplicates)}```' )
+#     for entry in duplicates:
+#         log.debug( f'entry in merge def, ```{pprint.pformat(entry)}```' )
+
+#         ## merge
+#         begin = ''
+#         end = ''
+#         for dup in entry['dup_list']:
+#             if begin == '':
+#                 begin = dup['begin']
+#             end = dup['end']
+#         ## find item to update
+#         floor = str( entry['floor'] )  # the dct-key is a string
+#         padded_aisle = entry['padded_aisle']
+#         log.debug( f'initial begin, ```{floor_dct[floor][padded_aisle]["begin"]}```' )
+#         log.debug( f'initial end, ```{floor_dct[floor][padded_aisle]["end"]}```' )
+#         floor_dct[floor][padded_aisle]['begin'] = begin
+#         floor_dct[floor][padded_aisle]['end'] = end
+#         log.debug( f'final begin, ```{floor_dct[floor][padded_aisle]["begin"]}```' )
+#         log.debug( f'final end, ```{floor_dct[floor][padded_aisle]["end"]}```' )
+#     log.debug( 'floor_dct has been updated' )
+#     return floor_dct
+
+
 def merge_duplicates( floor_dct, duplicates ):
     """ Replaces the initial floor-dct aisle-key/range-dct-value entries which have stubbed entries -- with proper merged data.
         Called by arrange_metadata_by_floor() """
@@ -182,19 +211,21 @@ def merge_duplicates( floor_dct, duplicates ):
         ## merge
         begin = ''
         end = ''
-        for dup in entry['dup_list']:
-            if begin == '':
-                begin = dup['begin']
-            end = dup['end']
+        dup_lst = entry.get( 'dup_list', None )
+        if dup_lst:
+            for dup in dup_lst:
+                if begin == '':
+                    begin = dup['begin']
+                end = dup['end']
         ## find item to update
         floor = str( entry['floor'] )  # the dct-key is a string
         padded_aisle = entry['padded_aisle']
-        log.debug( 'initial begin, ```{floor_dct[floor][padded_aisle]["begin"]}```' )
-        log.debug( 'initial end, ```{floor_dct[floor][padded_aisle]["end"]}```' )
+        log.debug( f'initial begin, ```{floor_dct[floor][padded_aisle]["begin"]}```' )
+        log.debug( f'initial end, ```{floor_dct[floor][padded_aisle]["end"]}```' )
         floor_dct[floor][padded_aisle]['begin'] = begin
         floor_dct[floor][padded_aisle]['end'] = end
-        log.debug( 'final begin, ```{floor_dct[floor][padded_aisle]["begin"]}```' )
-        log.debug( 'final end, ```{floor_dct[floor][padded_aisle]["end"]}```' )
+        log.debug( f'final begin, ```{floor_dct[floor][padded_aisle]["begin"]}```' )
+        log.debug( f'final end, ```{floor_dct[floor][padded_aisle]["end"]}```' )
     log.debug( 'floor_dct has been updated' )
     return floor_dct
 
