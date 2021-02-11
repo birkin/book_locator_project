@@ -1,8 +1,8 @@
 ## webapp
-Django==1.11.23
+Django==1.11.29
 git+https://github.com/birkin/shellvars-py.git
-PyMySQL==0.9.3
-requests==2.22.0
+PyMySQL==1.0.2
+requests==2.25.1
 
 ## indexer
 oauth2client==4.1.3
